@@ -4,8 +4,11 @@ actor Manager
 boundary AppUI
 control AppController
 entity ServiceRequestList
-entity TechnicianList
 Manager -> AppUI : recordServiceCharge()
+AppUI -> AppController : getAllServiceRequest()
+AppController -> ServiceRequestList : getAll()
+ServiceRequestList --> AppController : allRequests
+AppController --> AppUI : allRequests
 loop while gotError
     AppUI -> AppController : searchServiceRequest(requestId)
     AppController -> ServiceRequestList : searchServiceRequest(requestId)
