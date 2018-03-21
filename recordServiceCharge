@@ -1,0 +1,24 @@
+@startuml
+actor Manager
+boundary AppUI
+control AppController
+entity ServiceRequestList
+entity TechnicianList
+Manager -> AppUI : recordServiceCharge()
+loop while gotError
+    AppUI -> AppController : searchServiceRequest(requestId)
+    AppController -> ServiceRequestList : searchServiceRequest(requestId)
+    alt request found
+        ServiceRequestList --> AppController : request
+        AppController --> AppUI : success
+    else request not found
+        ServiceRequestList --> AppController : Error("Service request not found")
+        AppController --> AppUI : error
+    end
+end
+AppUI -> AppController : recordServiceCharge(amount)
+AppController -> ServiceRequestList : recordServiceCharge(requestId, amount)
+ServiceRequestList --> AppController 
+AppController --> AppUI
+AppUI --> Manager
+@enduml

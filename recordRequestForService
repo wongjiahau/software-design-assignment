@@ -10,14 +10,21 @@ AppController -> ClientList : searchClient(icNumber)
 alt client found
     ClientList --> AppController : client
 else client not found
-    ClientList --> AppController : null
-    AppController --> AppUI : "client not found"
-    AppUI -> AppController : createNewClient(ic, name, phone, address)
-    AppController -> ClientList : createNewClient(ic, name, phone, address)
-    create Client
-    ClientList -> Client : <<create>>(ic, name, phone, address)
-    Client --> ClientList
-    ClientList --> AppController : client
+    ClientList --> AppController : Error("client not found")
+    AppController --> AppUI : error
+    loop while gotError
+        AppUI -> AppController : createNewClient(ic, name, phone, address)
+        AppController -> ClientList : createNewClient(ic, name, phone, address)
+        create Client
+        ClientList -> Client : <<create>>(ic, name, phone, address)
+        opt success
+            Client --> ClientList : client
+            ClientList --> AppController : client
+        else Input format error
+            Client --> AppController : Error("Invalid input format")
+            AppController --> AppUI : error
+        end
+    end
 end
 AppController -> ServiceRequestList : addServiceRequest(client)
 create ServiceRequest
