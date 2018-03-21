@@ -11,7 +11,7 @@ ServiceRequestList --> AppController : allRequests
 AppController --> AppUI : allRequests
 loop while gotError
     AppUI -> AppController : searchServiceRequest(requestId)
-    AppController -> ServiceRequestList : searchServiceRequest(requestId)
+    AppController -> ServiceRequestList : search(requestId)
     alt request found
         ServiceRequestList --> AppController : request
         AppController --> AppUI : success
