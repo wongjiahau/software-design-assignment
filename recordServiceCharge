@@ -1,4 +1,5 @@
 @startuml
+title Record service charge
 actor Manager
 boundary AppUI
 control AppController

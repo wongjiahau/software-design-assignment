@@ -1,4 +1,5 @@
 @startuml
+title Record request for service
 actor Manager
 boundary AppUI
 control AppController
