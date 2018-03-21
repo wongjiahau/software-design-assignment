@@ -1,0 +1,30 @@
+@startuml
+actor Manager
+boundary AppUI
+control AppController
+entity ServiceRequestList
+entity ClientList
+Manager -> AppUI: recordRequestForService()
+AppUI -> AppController : searchClient(icNumber)
+AppController -> ClientList : searchClient(icNumber)
+alt client found
+    ClientList --> AppController : client
+else client not found
+    ClientList --> AppController : null
+    AppController --> AppUI : "client not found"
+    AppUI -> AppController : createNewClient(ic, name, phone, address)
+    AppController -> ClientList : createNewClient(ic, name, phone, address)
+    create Client
+    ClientList -> Client : <<create>>(ic, name, phone, address)
+    Client --> ClientList
+    ClientList --> AppController : client
+end
+AppController -> ServiceRequestList : addServiceRequest(client)
+create ServiceRequest
+ServiceRequestList -> ServiceRequest : <<create>>(client)
+ServiceRequest --> ServiceRequestList
+ServiceRequestList --> AppController 
+AppController --> AppUI : "success"
+AppUI --> Manager
+
+@endum1
