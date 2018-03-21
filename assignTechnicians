@@ -1,0 +1,43 @@
+@startuml
+title Assign technician to service request
+actor Manager
+boundary AppUI
+control AppController
+entity ServiceRequestList
+entity TechnicianList
+Manager -> AppUI : assignTechnician()
+AppUI -> AppController : getAllServiceRequests()
+AppController -> ServiceRequestList : getAll()
+ServiceRequestList --> AppController : allRequests
+AppController --> AppUI : allRequests
+loop while gotError
+    AppUI -> AppController : searchServiceRequest(requestId)
+    AppController -> ServiceRequestList : search(requestId)
+    alt request found
+        ServiceRequestList --> AppController : request
+        AppController --> AppUI : success
+    else request not found
+        ServiceRequestList --> AppController : Error("Service request not found")
+        AppController --> AppUI : error
+    end
+end
+AppUI -> AppController : getAllTechnicians()
+AppController -> TechnicianList : getAll()
+TechnicianList --> AppController : allTechnicians
+AppController --> AppUI : allTechnicians
+AppUI -> AppController : searchTechnician(technicianId)
+loop while gotError
+    AppUI -> AppController : searchTechnician(technicianId)
+    AppController -> TechnicianList : search(technicianId)
+    alt technician found
+        TechnicianList --> AppController : technician
+    else technician not found
+        TechnicianList --> AppController : Error("Technician not found")
+        AppController --> AppUI : error
+    end
+end
+AppController -> ServiceRequestList : assignTechnician(requestId, technicianId) 
+ServiceRequestList --> AppController 
+AppController --> AppUI
+AppUI --> Manager
+@enduml
