@@ -1,13 +1,19 @@
 package system;
 
+
 import boundary.AppUi;
 import control.AppController;
+import model.ClientStore;
+import model.ServiceRequestStore;
 
 public class App {
     public static void main(String[] args) {
-        AppUi appUi = new AppUi(new AppController());
-        appUi.run();
-        System.out.println("hello");
+        AppController appController = new AppController(
+            new AppUi(), 
+            new ClientStore(), 
+            new ServiceRequestStore()
+        );
+        appController.run();
     }
 
 }
