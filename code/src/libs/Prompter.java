@@ -4,28 +4,31 @@ import java.io.PrintStream;
 import java.util.Scanner;
 import java.util.regex.*;
 
-public class Prompter {
-    private PrintStream printer;
-    private Scanner scanner;
+import boundary.IPrinter;
+import boundary.IScanner;
 
-    public Prompter() {
-        this.printer = new PrintStream(System.out);
-        this.scanner = new Scanner(System.in);
+public class Prompter {
+    private IPrinter printer;
+    private IScanner scanner;
+
+    public Prompter(IPrinter printer, IScanner scanner) {
+        this.printer = printer;
+        this.scanner = scanner;
     }
 
     public String prompt(String message, String prompt, String regexPattern, String errorMessage) {
-        this.printer.println(message);
+        this.printer.printLine(message);
         return this.prompt(prompt, regexPattern, errorMessage);
     }
 
     public String prompt(String prompt, String regexPattern, String errorMessage) {
         this.printer.print(prompt + " >> ");
         while (true) {
-            String input = this.scanner.nextLine();
+            String input = this.scanner.getNextLine();
             if (Pattern.matches(regexPattern, input)) {
                 return input;
             }
-            this.printer.println("ERROR : " + errorMessage);
+            this.printer.printLine("ERROR : " + errorMessage);
             this.printer.print(prompt + " >> ");
         }
     }

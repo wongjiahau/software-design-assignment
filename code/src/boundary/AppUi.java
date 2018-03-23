@@ -1,19 +1,16 @@
 package boundary;
 
 import java.io.PrintStream;
-import java.util.Scanner;
 
 import libs.Prompter;
 
 public class AppUi {
-    private Scanner scanner;
-    private PrintStream printer;
+    private IPrinter printer;
     private Prompter prompter;
 
-    public AppUi() {
-        this.scanner = new Scanner(System.in);
-        this.printer = new PrintStream(System.out);
-        this.prompter = new Prompter();
+    public AppUi(IPrinter printer, IScanner scanner) {
+        this.printer = printer;
+        this.prompter = new Prompter(printer, scanner);
     }
 
     public void run() {
@@ -42,8 +39,8 @@ public class AppUi {
     }
 
 	public void displayClientNotExist() {
-        this.printer.println("This client does not exist in the system.");
-        this.printer.println("Please key in his/her detail.");
+        this.printer.printLine("This client does not exist in the system.");
+        this.printer.printLine("Please key in his/her detail.");
 	}
 
 	public String getName() {
@@ -74,6 +71,6 @@ public class AppUi {
         String message = "A new service request has been created for " 
                        + clientName + " at " + dateTime  + ".";
         message += "\nThe ID of this service request is " + serviceRequestId + ".";
-        this.printer.println(message);
+        this.printer.printLine(message);
 	}
 }
