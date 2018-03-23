@@ -3,6 +3,10 @@ package model;
 public abstract class Contactable {
     private String name;
     private String phoneNumber;
+    public Contactable(String name, String phoneNumber) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+    }
 
     public String getName() {
         return name;

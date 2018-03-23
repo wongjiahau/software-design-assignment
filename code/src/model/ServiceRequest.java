@@ -6,22 +6,25 @@ public class ServiceRequest {
     private String id;
     private Date dateOfRequest;
     private Date dateOfService;
-    private double charge;
+	private double charge;
+	private Client client;
+	private Technician technician;
 
-    public ServiceRequest(String id) {
-        this.id = id;
+    public ServiceRequest(Client client) {
+		this.client = client;
+		this.dateOfRequest = new Date();
     }
 
 	public String getId() {
 		return id;
 	}
 
-	public Date getDateOfRequest() {
-		return dateOfRequest;
+	public String setId() {
+		return id;
 	}
 
-	public void setDateOfRequest(Date dateOfRequest) {
-		this.dateOfRequest = dateOfRequest;
+	public Date getDateOfRequest() {
+		return dateOfRequest;
 	}
 
 	public Date getDateOfService() {
@@ -38,5 +41,17 @@ public class ServiceRequest {
 
 	public void setCharge(double charge) {
 		this.charge = charge;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public Technician getTechnician() {
+		return technician;
+	}
+
+	public void setTechnician(Technician technician) {
+		this.technician = technician;
 	}
 }

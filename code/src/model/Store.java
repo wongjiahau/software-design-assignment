@@ -2,27 +2,28 @@ package model;
 
 import java.util.HashMap;
 
-public abstract class Store<T> implements IStore<T> {
+public abstract class Store<T> {
     private HashMap<String, T> map;
 
     protected Store() {
         this.map = new HashMap<String, T>();
     }
 
-    public T searchById(String id) throws Exception {
+    protected T searchById(String id) {
         T result = (T) (this.map.get(id));
         if (result == null) {
-            throw new Exception("Invalid id : " + id);
+            return null;
         }
         return result;
     }
 
-    public void add(String id, T data) throws Exception {
+    protected boolean add(String id, T data) {
         boolean idExisted = this.map.get(id) != null;
         if(idExisted) {
-            throw new Exception("The id :'" + id + "' already exist in this data store.");
+            return false;
         }
         this.map.put(id, data);
+        return true;
     }
 
 }
