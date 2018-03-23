@@ -16,12 +16,9 @@ public class RecordRequestView extends View {
 
 	public boolean displayClientNotExist() {
         this.stream.printLine("This client does not exist in the system.");
-        String result = this.prompter.prompt(
-            "Do you want to create a new client? (y/n)", 
-            "^([yY]|[nN])$", 
-            "Invalid choice."
+        return this.prompter.promptYesNo(
+            "Do you want to create a new client?"
         );
-        return result.equalsIgnoreCase("y");
 	}
 
 	public String getName() {
@@ -54,8 +51,11 @@ public class RecordRequestView extends View {
         message += "\nThe ID of this service request is " + serviceRequestId + ".";
         this.stream.printLine(message);
 	}
-	public boolean displayClientInfo() {
-		return false;
+	public boolean displayClientInfo(String clientName) {
+        return this.prompter.promptYesNo(
+            "The I/C matched a client named '" + clientName + "'.", 
+            "Do you want to create a new service request for this client? "
+        );
 	}
 
 

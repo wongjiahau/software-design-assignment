@@ -32,8 +32,8 @@ public class RecordRequestController implements IController {
 			String address = this.view.getAddress();
 			client = new Client(clientIc, name, phoneNum, address);
 			this.clientStore.add(client);
-		} else if (this.view.displayClientInfo()) {
-			return true;
+		} else if (!this.view.displayClientInfo(client.getName())) {
+			return false;
 		}
 		ServiceRequest newServiceRequest = new ServiceRequest(client);
 		this.serviceRequestStore.add(newServiceRequest);

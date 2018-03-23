@@ -6,9 +6,9 @@ import libs.Prompter;
 public abstract class View {
     protected IStream stream;
     protected Prompter prompter;
-    public View(IStream ioStream) {
-        this.stream = ioStream;
-        this.prompter = new Prompter(ioStream);
+    public View(IStream stream) {
+        this.stream = stream;
+        this.prompter = new Prompter(stream);
     }
 
 }
