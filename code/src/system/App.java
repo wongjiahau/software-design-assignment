@@ -1,21 +1,25 @@
 package system;
 
 
-import boundary.AppUi;
-import boundary.ConsolePrinter;
-import boundary.ConsoleScanner;
-import control.AppController;
+import boundary.ViewFactory;
+import control.ControllerFactory;
+import control.IController;
+import control.MainController;
+import libs.ConsoleStream;
 import model.ClientStore;
 import model.ServiceRequestStore;
+import model.TechnicianStore;
 
 public class App {
     public static void main(String[] args) {
-        AppController appController = new AppController(
-            new AppUi(new ConsolePrinter(), new ConsoleScanner()), 
-            new ClientStore(), 
+        ViewFactory viewFactory = new ViewFactory(new ConsoleStream());
+        ControllerFactory controllerFactory = new ControllerFactory(
+            viewFactory,
+            new ClientStore(),
+            new TechnicianStore(),
             new ServiceRequestStore()
         );
-        while(appController.run());
+        IController controller = new MainController(controllerFactory, viewFactory);
+        while(controller.run());
     }
-
 }

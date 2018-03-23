@@ -3,12 +3,15 @@ package boundary;
 import libs.IStream;
 
 public class ViewFactory {
-    private IStream ioStream;
-    public ViewFactory(IStream ioStream) {
-        this.ioStream = ioStream;
+    private IStream stream;
+    public ViewFactory(IStream stream) {
+        this.stream = stream;
     }
     public MainView createMainView() {
-        return new MainView(this.ioStream);
+        return new MainView(this.stream);
     }
+	public RecordRequestView createRecordRequestView() {
+		return new RecordRequestView(this.stream);
+	}
 	
 }

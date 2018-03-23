@@ -4,10 +4,10 @@ import libs.IStream;
 import libs.Prompter;
 
 public abstract class View {
-    protected IStream ioStream;
+    protected IStream stream;
     protected Prompter prompter;
     public View(IStream ioStream) {
-        this.ioStream = ioStream;
+        this.stream = ioStream;
         this.prompter = new Prompter(ioStream);
     }
 
