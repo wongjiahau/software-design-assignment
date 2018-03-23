@@ -8,6 +8,7 @@ public class MainView extends View {
     }
 
     public String displayMenu() {
+        super.displayTitle("main menu");
         String menu = "Select your options: \n";
         menu += " 1. Record request for service (RFS)\n";
         menu += " 2. Assign technician to RFS\n";

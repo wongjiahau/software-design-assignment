@@ -4,8 +4,8 @@ import java.util.regex.*;
 
 public class Prompter {
     private IStream stream;
-    public Prompter(IStream ioStream) {
-        this.stream = ioStream;
+    public Prompter(IStream stream) {
+        this.stream = stream;
     }
 
     public String prompt(String message, String prompt, String regexPattern, String errorMessage) {

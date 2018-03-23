@@ -7,6 +7,7 @@ public class RecordRequestView extends View {
         super(stream);
     }
     public String getIc() {
+        super.displayTitle("record request for service");
         return this.prompter.prompt(
             "Enter client's I/C number", 
             "\\d{6}-\\d{2}-\\d{4}", 
