@@ -3,6 +3,7 @@ package tests;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -20,7 +21,8 @@ public class TestView {
 			"s1,2018-09-02,John Connor",
 			"s2,2018-10-22,Kim"
 		};
-		view.displayTable(header, rows);
+
+		view.displayTable(header, new ArrayList<String>(Arrays.asList(rows)));
 		String expected = "" 
 			+ "ID  DATE-OF-REQUEST  NAME         \n"
 			+ "s1  2018-09-02       John Connor  \n"

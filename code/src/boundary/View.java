@@ -1,7 +1,6 @@
 package boundary;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import libs.IStream;
@@ -30,10 +29,11 @@ public class View {
      * @param header Should be delimited by comma. Example: "id,name,age"
      * @param rows Data should be delimited by comma. Example: ["1,John,12","2,Kim,13"]
      */
-    public void displayTable(String header, String[] rows) {
+    public void displayTable(String header, ArrayList<String> rows) {
+        final int MARGIN = 3;
         ArrayList<String> allRows = new ArrayList<String>();
         allRows.add(header);
-        allRows.addAll(Arrays.asList(rows));
+        allRows.addAll(rows);
 
         HashMap<Integer, ArrayList<String>> columns = new HashMap<Integer, ArrayList<String>>();
         for (int i = 0; i < allRows.size(); i++) {
@@ -56,7 +56,7 @@ public class View {
                     maxLength = data.length();
                 }
             }
-            maxLength += 2;
+            maxLength += MARGIN;
             for (int j = 0; j < col.size(); j++) {
                col.set(j, StringUtil.padRight(col.get(j), maxLength));
             }

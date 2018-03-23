@@ -33,7 +33,10 @@ public class ControllerFactory {
     }
 
     public AssignTechnicianController createAssignTechnicianController() {
-        return new AssignTechnicianController();
+        return new AssignTechnicianController(
+            this.viewFactory,
+            this.serviceRequestStore
+        );
     }
 
     public RecordServiceChargeController createRecordServiceChargeController() {

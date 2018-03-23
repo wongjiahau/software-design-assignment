@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public abstract class Store<T> {
@@ -30,6 +31,10 @@ public abstract class Store<T> {
 
     protected T getLastInserted() {
         return this.map.get(this.lastInsertedKey);
+    }
+
+    protected Collection<T> getAll() {
+        return this.map.values();
     }
 
 }

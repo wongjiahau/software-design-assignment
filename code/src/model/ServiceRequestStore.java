@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collection;
 
 public class ServiceRequestStore extends Store<ServiceRequest> {
     public ServiceRequestStore() {
@@ -13,6 +14,10 @@ public class ServiceRequestStore extends Store<ServiceRequest> {
 
     public ServiceRequest getLastInserted() {
         return super.getLastInserted();
+    }
+
+    public Collection<ServiceRequest> getAll() {
+        return super.getAll();
     }
 
 }
