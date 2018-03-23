@@ -1,6 +1,7 @@
-package boundary;
+package libs;
 
-public interface IPrinter {
+public interface IStream {
+    String getNextLine();
     void print(String message);
     void printLine(String message);
 }

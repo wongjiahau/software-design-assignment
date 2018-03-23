@@ -1,35 +1,27 @@
 package libs;
 
-import java.io.PrintStream;
-import java.util.Scanner;
 import java.util.regex.*;
 
-import boundary.IPrinter;
-import boundary.IScanner;
-
 public class Prompter {
-    private IPrinter printer;
-    private IScanner scanner;
-
-    public Prompter(IPrinter printer, IScanner scanner) {
-        this.printer = printer;
-        this.scanner = scanner;
+    private IStream ioStream;
+    public Prompter(IStream ioStream) {
+        this.ioStream = ioStream;
     }
 
     public String prompt(String message, String prompt, String regexPattern, String errorMessage) {
-        this.printer.printLine(message);
+        this.ioStream.printLine(message);
         return this.prompt(prompt, regexPattern, errorMessage);
     }
 
     public String prompt(String prompt, String regexPattern, String errorMessage) {
-        this.printer.print(prompt + " >> ");
+        this.ioStream.print(prompt + " >> ");
         while (true) {
-            String input = this.scanner.getNextLine();
+            String input = this.ioStream.getNextLine();
             if (Pattern.matches(regexPattern, input)) {
                 return input;
             }
-            this.printer.printLine("ERROR : " + errorMessage);
-            this.printer.print(prompt + " >> ");
+            this.ioStream.printLine("ERROR : " + errorMessage);
+            this.ioStream.print(prompt + " >> ");
         }
     }
 
