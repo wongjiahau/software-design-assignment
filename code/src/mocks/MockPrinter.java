@@ -19,6 +19,10 @@ public class MockPrinter implements IPrinter {
 	@Override
 	public void printLine(String message) {
         this.printedLines.add(message);
-	}
+    }
+    
+    public String getLastPrintedLine() {
+        return this.printedLines.get(this.printedLines.size() - 1);
+    }
 
 }
