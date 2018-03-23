@@ -27,7 +27,7 @@ public class MockStream implements IStream {
 
 	@Override
 	public void print(String message) {
-        this.printLine(message);
+        this.printedLines += message;
     }
 
 	@Override

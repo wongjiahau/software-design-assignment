@@ -54,7 +54,7 @@ public class RecordRequestView extends View {
 	}
 	public boolean displayClientInfo(String clientName) {
         return this.prompter.promptYesNo(
-            "The I/C matched a client named '" + clientName + "'.", 
+            "The I/C matched a client named '" + clientName + "'.\n", 
             "Do you want to create a new service request for this client? "
         );
 	}

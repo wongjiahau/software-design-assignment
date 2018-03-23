@@ -9,7 +9,7 @@ import org.junit.Test;
 import boundary.ViewFactory;
 import control.IController;
 import control.RecordRequestController;
-import mocks.MockClientStore;
+import mocks.MockStoreFactory;
 import mocks.MockStream;
 import model.ClientStore;
 import model.ServiceRequestStore;
@@ -21,7 +21,7 @@ public class TestRecordRequest {
 	public RecordRequestController getController(ArrayList<String> inputLines) {
 		this.mockStream = new MockStream(inputLines);
 		ViewFactory viewFactory = new ViewFactory(this.mockStream);
-		this.clientStore = new MockClientStore();
+		this.clientStore = new MockStoreFactory().createMockClientStore();
 		this.serviceRequestStore = new ServiceRequestStore();
 		return new RecordRequestController(viewFactory, clientStore, serviceRequestStore);
 	}
@@ -35,10 +35,11 @@ public class TestRecordRequest {
 		controller.run();
 		String expectedOutput = ""
 		    + "Enter client's I/C number\n"
-			+ ">> \n"
+			+ ">> "
 			+ "The I/C matched a client named 'Ali'.\n"
 			+ "Do you want to create a new service request for this client?  (y/n) \n"
-			+ ">> \n";
+			+ ">> ";
+		System.out.println(mockStream.getPrintedLines());
 		assertTrue(this.mockStream.getPrintedLines().contains(expectedOutput));
 
 	}
@@ -59,16 +60,16 @@ public class TestRecordRequest {
 		assertEquals(this.serviceRequestStore.getLastInserted().getClient().getIcNumber(), ic);
 		String expectedOutput = ""
 			+ "Enter client's I/C number\n"
-			+ ">> \n"
+			+ ">> "
 			+ "This client does not exist in the system.\n"
 			+ "Do you want to create a new client? (y/n) \n"
-			+ ">> \n"
+			+ ">> "
 			+ "Enter name\n"
-			+ ">> \n"
+			+ ">> "
 			+ "Enter phone number\n"
-			+ ">> \n"
+			+ ">> "
 			+ "Enter address\n"
-			+ ">> \n";
+			+ ">> ";
 		assertTrue(this.mockStream.getPrintedLines().contains(expectedOutput)); 
 	}
 }
