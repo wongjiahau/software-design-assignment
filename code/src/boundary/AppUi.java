@@ -29,10 +29,11 @@ public class AppUi {
         menu += " 1. Record request for service (RFS)\n";
         menu += " 2. Assign technician to RFS\n";
         menu += " 3. Record service charge for RFS\n";
+        menu += " 4. Exit\n";
         return this.prompter.prompt(
             menu, 
             "Select your choice", 
-            "[1-3]{1}", 
+            "[1-4]{1}", 
             "Invalid choice."
         );
 
@@ -72,5 +73,9 @@ public class AppUi {
                        + clientName + " at " + dateTime  + ".";
         message += "\nThe ID of this service request is " + serviceRequestId + ".";
         this.printer.printLine(message);
+	}
+
+	public void displayGoodBye() {
+        this.printer.printLine("Good bye.");
 	}
 }

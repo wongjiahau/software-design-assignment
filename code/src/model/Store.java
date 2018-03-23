@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public abstract class Store<T> {
     private HashMap<String, T> map;
+    private String lastInsertedKey;
 
     protected Store() {
         this.map = new HashMap<String, T>();
@@ -23,7 +24,12 @@ public abstract class Store<T> {
             return false;
         }
         this.map.put(id, data);
+        this.lastInsertedKey = id;
         return true;
+    }
+
+    protected T getLastInserted() {
+        return this.map.get(this.lastInsertedKey);
     }
 
 }

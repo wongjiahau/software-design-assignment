@@ -16,22 +16,23 @@ public class AppController {
         this.ui = ui;
     }
 
-    public void run() {
-        while(true) {
-            String choice = this.ui.displayMenu();
-            switch (choice) {
-            case "1":
-                this.recordRequestForService();
-                break;
-            case "2":
-                this.assignTechnician();
-                break;
-            case "3":
-                this.recordServiceCharge();
-                break;
-            }
+    public boolean run() {
+        String choice = this.ui.displayMenu();
+        switch (choice) {
+        case "1":
+            this.recordRequestForService();
+            break;
+        case "2":
+            this.assignTechnician();
+            break;
+        case "3":
+            this.recordServiceCharge();
+            break;
+        case "4":
+            this.ui.displayGoodBye();
+            return false;
         }
-
+        return true;
     }
 
     private void recordRequestForService() {

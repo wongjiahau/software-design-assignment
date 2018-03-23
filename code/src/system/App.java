@@ -15,7 +15,7 @@ public class App {
             new ClientStore(), 
             new ServiceRequestStore()
         );
-        appController.run();
+        while(appController.run());
     }
 
 }
