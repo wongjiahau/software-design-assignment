@@ -13,7 +13,22 @@ public class ServiceRequest {
     public ServiceRequest(Client client) {
 		this.client = client;
 		this.dateOfRequest = new Date();
-    }
+		this.charge = 0;
+	}
+	
+    /**
+     * Pending service request are those that have yet to be assign a technician
+     */
+	public boolean isPending() {
+		return this.getTechnician() == null;
+	}
+
+    /**
+     * Assigned service request are those that have a techinician associated but no service charge recorded yet
+     */
+	public boolean isAssigned() {
+		return !this.isPending() && this.getCharge() == 0;
+	}
 
 	public int getId() {
 		return id;

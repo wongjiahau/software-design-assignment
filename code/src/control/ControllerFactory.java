@@ -41,7 +41,10 @@ public class ControllerFactory {
     }
 
     public RecordServiceChargeController createRecordServiceChargeController() {
-        return new RecordServiceChargeController();
+        return new RecordServiceChargeController(
+            this.viewFactory,
+            this.serviceRequestStore
+        );
     }
 
 }

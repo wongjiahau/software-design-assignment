@@ -45,6 +45,10 @@ public class Prompter {
         return Integer.parseInt(this.prompt(prompt, "^[0-9]+$", "Invalid format."));
     }
 
+    public double promptDouble(String prompt) {
+        return Double.parseDouble(this.prompt(prompt + " (XX.XX)", "^[0-9]+[.][0-9]+$", "Invalid format."));
+    }
+
     public String promptForStringId(String prompt, ArrayList<String> validIds) {
         while(true) {
             String chosenId = this.prompt(prompt, ".*", "");

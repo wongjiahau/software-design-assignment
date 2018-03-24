@@ -1,5 +1,7 @@
 package mocks;
 
+import java.util.Date;
+
 import model.Client;
 import model.ClientStore;
 import model.ServiceRequest;
@@ -10,6 +12,7 @@ import model.TechnicianStore;
 public class MockStoreFactory {
     private Client client1;
     private Client client2;
+    private Client client3;
     private Technician technician1;
     private Technician technician2;
 
@@ -17,6 +20,7 @@ public class MockStoreFactory {
         super();
         this.client1 = new Client("960819-43-5437", "Ali", "011-8274382", "17-3-8, Winner Court B, Desa Petaling");
         this.client2 = new Client("971231-12-1234", "John", "012-3456789", "Lot 10, Jln Redang, Bukit Serdang");
+        this.client3 = new Client("880808-08-8888", "Ah Huat", "018-8888888", "18-8-8, Taman Gembira, OUG");
     }
 
     public ClientStore createMockClientStore() {
@@ -37,8 +41,14 @@ public class MockStoreFactory {
 
     public ServiceRequestStore createMockServiceRequestStore() {
         ServiceRequestStore serviceRequestStore = new ServiceRequestStore();
-        serviceRequestStore.add(new ServiceRequest(this.client1));
-        serviceRequestStore.add(new ServiceRequest(this.client2));
+        ServiceRequest serviceRequest1 = new ServiceRequest(this.client1);
+        ServiceRequest serviceRequest2 = new ServiceRequest(this.client2);
+        ServiceRequest serviceRequest3 = new ServiceRequest(this.client3);
+        serviceRequest2.setTechnician(this.technician1);
+        serviceRequest2.setDateOfService(new Date());
+        serviceRequestStore.add(serviceRequest1);
+        serviceRequestStore.add(serviceRequest2);
+        serviceRequestStore.add(serviceRequest3);
         return serviceRequestStore;
     }
 }

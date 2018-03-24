@@ -33,12 +33,23 @@ public class ServiceRequestStore extends Store<ServiceRequest> {
         ArrayList<ServiceRequest> pendingServiceRequests = new ArrayList<ServiceRequest>();
         for (int i = 0; i < allServiceRequests.size(); i++) {
             ServiceRequest serviceRequest = allServiceRequests.get(i);
-            if(serviceRequest.getTechnician() == null) {
+            if(serviceRequest.isPending()) {
                 pendingServiceRequests.add(serviceRequest);
             }
-            
         }
 		return pendingServiceRequests;
+	}
+
+	public ArrayList<ServiceRequest> getAssigned() {
+        ArrayList<ServiceRequest> allServiceRequests = new ArrayList<ServiceRequest>(this.getAll());
+        ArrayList<ServiceRequest> assignedServiceRequests = new ArrayList<ServiceRequest>();
+        for (int i = 0; i < allServiceRequests.size(); i++) {
+            ServiceRequest serviceRequest = allServiceRequests.get(i);
+            if(serviceRequest.isAssigned()) {
+                assignedServiceRequests.add(serviceRequest);
+            }
+        }
+		return assignedServiceRequests;
 	}
 
 }
