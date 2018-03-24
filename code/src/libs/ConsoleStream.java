@@ -20,5 +20,11 @@ public class ConsoleStream implements IStream {
 	@Override
 	public String getNextLine() {
         return this.scanner.nextLine();
+    }
+
+	@Override
+	public void pressAnyKeyToContinue() {
+        System.out.println("Press any key to continue . . .");
+        this.scanner.nextLine();
 	}
 }

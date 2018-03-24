@@ -13,12 +13,12 @@ import model.TechnicianStore;
 
 public class App {
     public static void main(String[] args) {
-        MockStoreFactory mockStoreFactory = new MockStoreFactory();
-        ClientStore clientStore = mockStoreFactory.createMockClientStore();
-        TechnicianStore technicianStore =  new TechnicianStore();
+        MockStoreFactory mockStoreFactory       = new MockStoreFactory();
+        ClientStore clientStore                 = mockStoreFactory.createMockClientStore();
+        TechnicianStore technicianStore         = mockStoreFactory.createMockTechnicianStore();
         ServiceRequestStore serviceRequestStore = mockStoreFactory.createMockServiceRequestStore();
-        ViewFactory viewFactory = new ViewFactory(new ConsoleStream());
-        ControllerFactory controllerFactory = new ControllerFactory(
+        ViewFactory viewFactory                 = new ViewFactory(new ConsoleStream());
+        ControllerFactory controllerFactory     = new ControllerFactory(
             viewFactory,
             clientStore,
             technicianStore,

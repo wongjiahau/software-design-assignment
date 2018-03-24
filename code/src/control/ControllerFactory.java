@@ -35,6 +35,7 @@ public class ControllerFactory {
     public AssignTechnicianController createAssignTechnicianController() {
         return new AssignTechnicianController(
             this.viewFactory,
+            this.technicianStore,
             this.serviceRequestStore
         );
     }

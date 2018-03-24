@@ -3,7 +3,7 @@ package model;
 import java.util.Date;
 
 public class ServiceRequest {
-    private String id;
+    private int id;
     private Date dateOfRequest;
     private Date dateOfService;
 	private double charge;
@@ -15,12 +15,12 @@ public class ServiceRequest {
 		this.dateOfRequest = new Date();
     }
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public String setId() {
-		return id;
+	public void setId(int id) {
+		this.id = id;	
 	}
 
 	public Date getDateOfRequest() {

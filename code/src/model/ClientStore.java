@@ -6,7 +6,7 @@ public class ClientStore extends Store<Client> {
     }
 
     public Client searchByIc(String icNumber) {
-        return super.searchById(icNumber);
+        return super.getById(icNumber);
     }
 
     public boolean add(Client newClient) {

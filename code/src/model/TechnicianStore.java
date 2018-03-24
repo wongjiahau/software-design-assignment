@@ -10,4 +10,12 @@ public class TechnicianStore extends Store<Technician> {
     public Collection<Technician> getAll() {
         return super.getAll();
     }
+
+    public void add(Technician newTechnician) {
+        super.add(newTechnician.getId(), newTechnician);
+    }
+
+    public Technician getById(String technicianId) {
+        return super.getById(technicianId);
+    }
 }

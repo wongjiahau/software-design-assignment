@@ -38,4 +38,7 @@ public class MockStream implements IStream {
     public String getPrintedLines() {
         return this.printedLines;
     }
+
+	@Override
+	public void pressAnyKeyToContinue() {} 
 }

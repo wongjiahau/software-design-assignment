@@ -11,7 +11,7 @@ public abstract class Store<T> {
         this.map = new HashMap<String, T>();
     }
 
-    protected T searchById(String id) {
+    protected T getById(String id) {
         T result = (T) (this.map.get(id));
         if (result == null) {
             return null;
