@@ -30,6 +30,10 @@ public class AssignTechnicianController implements IController {
 	@Override
 	public boolean run() {
 		Collection<ServiceRequest> pendingServiceRequests = this.serviceRequestStore.getPending();
+		if(pendingServiceRequests.size() == 0) {
+			this.view.displayNoPendingServiceRequest();
+			return false;
+		}
 		int serviceRequestId                              = this.view.displayServiceRequests(new ArrayList<ServiceRequest>(pendingServiceRequests));
 		ServiceRequest chosenServiceRequest               = this.serviceRequestStore.getById(serviceRequestId);
 		Collection<Technician> allTehnicians              = this.technicianStore.getAll();

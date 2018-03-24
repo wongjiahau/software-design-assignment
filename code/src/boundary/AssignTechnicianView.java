@@ -66,4 +66,9 @@ public class AssignTechnicianView extends View {
         super.stream.pressAnyKeyToContinue();
 	}
 
+	public void displayNoPendingServiceRequest() {
+        super.stream.printLine("There are no pending service request.");
+        super.stream.pressAnyKeyToContinue();
+	}
+
 }

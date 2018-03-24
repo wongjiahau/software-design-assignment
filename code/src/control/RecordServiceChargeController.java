@@ -19,9 +19,13 @@ public class RecordServiceChargeController implements IController {
 	@Override
 	public boolean run() {
 		ArrayList<ServiceRequest> allAssignedServiceRequest = this.serviceRequestStore.getAssigned();
-		int serviceRequestId = this.view.displayServiceRequests(allAssignedServiceRequest);
+		if(allAssignedServiceRequest.size() == 0) {
+			this.view.displayNoAssignedServiceRequest();
+			return false;
+		}
+		int serviceRequestId                = this.view.displayServiceRequests(allAssignedServiceRequest);
 		ServiceRequest chosenServiceRequest = this.serviceRequestStore.getById(serviceRequestId);
-		double serviceCharge = this.view.getServiceCharge();
+		double serviceCharge                = this.view.getServiceCharge();
 		chosenServiceRequest.setCharge(serviceCharge);
 		this.view.displaySuccess();
 		return true;

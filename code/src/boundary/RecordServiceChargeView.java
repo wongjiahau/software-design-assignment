@@ -34,4 +34,9 @@ public class RecordServiceChargeView extends View {
         this.stream.printLine("The entered service charge bad been recorded\nfor the chosen service request");
         this.stream.pressAnyKeyToContinue();
 	}
+
+	public void displayNoAssignedServiceRequest() {
+        this.stream.printLine("There are no assigned service request.");
+        this.stream.pressAnyKeyToContinue();
+	}
 }
