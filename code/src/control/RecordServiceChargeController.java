@@ -3,16 +3,15 @@ package control;
 import java.util.ArrayList;
 
 import boundary.RecordServiceChargeView;
-import boundary.ViewFactory;
 import model.ServiceRequest;
 import model.ServiceRequestStore;
 
 public class RecordServiceChargeController implements IController {
 	private RecordServiceChargeView view;
 	private ServiceRequestStore serviceRequestStore;
-	public RecordServiceChargeController(ViewFactory viewFactory, ServiceRequestStore serviceRequestStore) {
+	public RecordServiceChargeController(RecordServiceChargeView view, ServiceRequestStore serviceRequestStore) {
 		super();
-		this.view = viewFactory.createRecordServiceChargeView();
+		this.view = view;
 		this.serviceRequestStore = serviceRequestStore;
 	}
 

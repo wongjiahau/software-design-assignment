@@ -23,7 +23,7 @@ public class TestRecordRequest {
 		ViewFactory viewFactory = new ViewFactory(this.mockStream);
 		this.clientStore = new MockStoreFactory().createMockClientStore();
 		this.serviceRequestStore = new ServiceRequestStore();
-		return new RecordRequestController(viewFactory, clientStore, serviceRequestStore);
+		return new RecordRequestController(viewFactory.createRecordRequestView(), clientStore, serviceRequestStore);
 	}
 
 	@Test 

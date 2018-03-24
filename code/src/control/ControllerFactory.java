@@ -26,7 +26,7 @@ public class ControllerFactory {
 
     public RecordRequestController createRecordRequestController() {
         return new RecordRequestController(
-            this.viewFactory,
+            this.viewFactory.createRecordRequestView(),
             this.clientStore, 
             this.serviceRequestStore
         );
@@ -34,7 +34,7 @@ public class ControllerFactory {
 
     public AssignTechnicianController createAssignTechnicianController() {
         return new AssignTechnicianController(
-            this.viewFactory,
+            this.viewFactory.createAssignTechnicianView(),
             this.technicianStore,
             this.serviceRequestStore
         );
@@ -42,7 +42,7 @@ public class ControllerFactory {
 
     public RecordServiceChargeController createRecordServiceChargeController() {
         return new RecordServiceChargeController(
-            this.viewFactory,
+            this.viewFactory.createRecordServiceChargeView(),
             this.serviceRequestStore
         );
     }

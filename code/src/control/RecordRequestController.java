@@ -1,7 +1,6 @@
 package control;
 
 import boundary.RecordRequestView;
-import boundary.ViewFactory;
 import model.Client;
 import model.ClientStore;
 import model.ServiceRequest;
@@ -12,10 +11,14 @@ public class RecordRequestController implements IController {
 	private ClientStore clientStore;
 	private ServiceRequestStore serviceRequestStore;
 
-	public RecordRequestController(ViewFactory viewFactory, ClientStore clientStore, ServiceRequestStore serviceRequestStore) {
+	public RecordRequestController(
+		RecordRequestView view, 
+		ClientStore clientStore, 
+		ServiceRequestStore serviceRequestStore
+	) {
 		super();
-		this.view = viewFactory.createRecordRequestView();
-		this.clientStore = clientStore;
+		this.view                = view;
+		this.clientStore         = clientStore;
 		this.serviceRequestStore = serviceRequestStore;
 	}
 

@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Date;
 
 import boundary.AssignTechnicianView;
-import boundary.ViewFactory;
 import model.ServiceRequest;
 import model.ServiceRequestStore;
 import model.Technician;
@@ -17,12 +16,12 @@ public class AssignTechnicianController implements IController {
 	private ServiceRequestStore serviceRequestStore;
 
 	public AssignTechnicianController(
-		ViewFactory factory, 
+		AssignTechnicianView view,
 		TechnicianStore technicianStore,
 		ServiceRequestStore serviceRequestStore
 	) {
 		super();
-		this.view                = factory.createAssignTechnicianView();
+		this.view                = view;
 		this.technicianStore     = technicianStore;
 		this.serviceRequestStore = serviceRequestStore;
 	}
