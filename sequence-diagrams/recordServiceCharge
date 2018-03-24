@@ -1,28 +1,41 @@
 @startuml
 title Record service charge
 actor Manager
-boundary AppUI
-control AppController
-entity ServiceRequestList
-Manager -> AppUI : recordServiceCharge()
-AppUI -> AppController : getAllServiceRequest()
-AppController -> ServiceRequestList : getAll()
-ServiceRequestList --> AppController : allRequests
-AppController --> AppUI : allRequests
-loop while gotError
-    AppUI -> AppController : searchServiceRequest(requestId)
-    AppController -> ServiceRequestList : search(requestId)
-    alt request found
-        ServiceRequestList --> AppController : request
-        AppController --> AppUI : success
-    else request not found
-        ServiceRequestList --> AppController : Error("Service request not found")
-        AppController --> AppUI : error
-    end
+boundary "view:\nRecordServiceChargeView" as view
+entity "store:\nstore" as store
+control MainController
+
+Manager -> MainController : recordServiceCharge()
+create control RecordServiceChargeController as controller
+MainController -> controller : <<create>>(view, store)
+controller --> MainController
+MainController -> controller : run()
+controller -> store : getAssigned()
+store --> controller : assignedServiceRequests
+alt assignedServiceRequests.length == 0
+    controller -> view : displayNoAssignedServiceRequest()
+    view --> controller
+else
+    controller -> view : displayServiceRequests(assignedServiceRequests)
+    view --> controller : serviceRequestId
+    controller -> view : getServiceCharge()
+    view --> controller : serviceCharge
+    controller -> store : getById(serviceRequestId)
+    store -> controller : chosenServiceRequest
+    controller -> chosenServiceRequest : setCharge(serviceCharge)
+    chosenServiceRequest --> controller
+    controller -> view : displaySuccess()
+    view --> controller
 end
-AppUI -> AppController : recordServiceCharge(amount)
-AppController -> ServiceRequestList : recordServiceCharge(requestId, amount)
-ServiceRequestList --> AppController 
-AppController --> AppUI
-AppUI --> Manager
+
+
+controller --> MainController 
+
+
+
+
+
+MainController --> Manager
+
 @enduml
+
