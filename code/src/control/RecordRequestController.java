@@ -40,8 +40,7 @@ public class RecordRequestController implements IController {
 		}
 		ServiceRequest newServiceRequest = new ServiceRequest(client);
 		this.serviceRequestStore.add(newServiceRequest);
-		this.view.displayServiceRequestCreated(client.getName(), newServiceRequest.getDateOfRequest().toString(),
-				newServiceRequest.getId());
+		this.view.displayServiceRequestCreated(newServiceRequest);
 		return true;
 	}
 
