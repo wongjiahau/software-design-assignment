@@ -11,7 +11,7 @@ import mocks.MockDAOFactory;
 
 public class App {
     public static void main(String[] args) {
-        IDAOFactory DAOFactory            = new MockDAOFactory();
+        IDAOFactory DAOFactory              = new MockDAOFactory();
         ViewFactory viewFactory             = new ViewFactory(new ConsoleStream());
         ControllerFactory controllerFactory = new ControllerFactory(
             viewFactory,

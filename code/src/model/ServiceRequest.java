@@ -27,7 +27,7 @@ public class ServiceRequest {
      * Assigned service request are those that have a techinician associated but no service charge recorded yet
      */
 	public boolean isAssigned() {
-		return !this.isPending() && this.getCharge() == 0;
+		return !this.isPending() && this.charge == 0;
 	}
 
 	public int getId() {
@@ -46,10 +46,6 @@ public class ServiceRequest {
 		return dateOfService;
 	}
 
-	public double getCharge() {
-		return charge;
-	}
-
 	public void setCharge(double charge) {
 		this.charge = charge;
 	}
@@ -64,11 +60,6 @@ public class ServiceRequest {
 
 	public void setTechnician(Technician technician, Date dateOfService) {
 		this.technician = technician;
-		this.setDateOfService(dateOfService);
-	}
-
-	private void setDateOfService(Date dateOfService) {
 		this.dateOfService = dateOfService;
 	}
-
 }

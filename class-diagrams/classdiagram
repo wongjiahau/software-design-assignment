@@ -1,0 +1,89 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+hide App fields
+class App {
+    {static} +main(args: string[]): void
+}
+
+hide IDAOFactory fields
+class IDAOFactory <<interface>> {
+    + getClientDAO(): ClientDAO
+    + getTechnicianDAO(): TechnicianDAO
+    + getServiceRequestDAO(): ServiceRequestDAO
+}
+App ..> IDAOFactory : <<use>>
+
+hide IClientDAO fields
+class IClientDAO <<interface>> {
+    + searchByIc(icNumber:String): Client
+    + add(newClient: Client): void
+}
+IDAOFactory ..> IClientDAO : <<use>>
+
+hide ITechnicianDAO fields
+class ITechnicianDAO <<interface>> {
+	+ getAll(): Collection<Technician> 
+    + add(newTechnician: Technician): void
+    + getById(technicianId: String): Technician
+}
+IDAOFactory ..> ITechnicianDAO : <<use>>
+
+hide IServiceRequestDAO fields
+class IServiceRequestDAO <<interface>> {
+    + add(newServiceRequest: ServiceRequest): boolean
+    + getById(id: int): ServiceRequest
+    + getPending(): Collection<ServiceRequest>
+    + getAssigned(): ArrayList<ServiceRequest>
+}
+IDAOFactory ..> IServiceRequestDAO : <<use>>
+
+class Client {
+    - icNumber: String
+    - address: String
+    + <<create>>(icNumber: String, address: String)
+}
+IClientDAO ..> Client: <<use>>
+
+class Technician {
+    - id: String
+    + <<create>>(id: String, name: String, phoneNumber: String)
+}
+ITechnicianDAO ..> Technician: <<use>>
+
+class ServiceRequest {
+    - id: int
+    - dateOfRequest: Date
+    - dateOfService: Date
+    - charge: double
+    - client: Client
+    - techinician: Technician
+    + <<create>>(client: Client)
+    + isPending(): boolean
+    + isAssigned(): boolean
+    + setTechnician(techinician: Technician, date: dateOfService): void
+} 
+IServiceRequestDAO ..> ServiceRequest: <<use>>
+ServiceRequest --> Client
+ServiceRequest --> Technician
+
+abstract class Contactable {
+    - name: String
+    - phoneNumber: String
+    + <<create>>(name: String, phoneNumber: String)
+}
+Contactable <|-- Client
+Contactable <|-- Technician
+
+
+
+show ViewFactory methods
+class ViewFactory {
+    +<<create>>(stream: IStream)
+    +createMainView(): MainView
+    +createRecordRequestView(): RecordRequestView
+    +createRecordServiceChargeView(): RecordServiceChargeView
+}
+
+@enduml
