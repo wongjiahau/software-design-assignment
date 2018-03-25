@@ -35,16 +35,12 @@ public class RecordRequestController implements IController {
 			String address = this.view.getAddress();
 			client = new Client(clientIc, name, phoneNum, address);
 			this.clientDAO.add(client);
-		} else if (!this.view.displayClientInfo(client.getName())) {
+		} else if (!this.view.displayClientInfo(client)) {
 			return false;
 		}
 		ServiceRequest newServiceRequest = new ServiceRequest(client);
 		this.serviceRequestDAO.add(newServiceRequest);
-		this.view.displayServiceRequestCreated(
-			newServiceRequest.getClient().getName(),
-			newServiceRequest.getDateOfRequest().toString(),
-			newServiceRequest.getId()
-		);
+		this.view.displayServiceRequestCreated(newServiceRequest);
 		return true;
 	}
 

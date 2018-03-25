@@ -1,6 +1,7 @@
 package boundary;
 
 import libs.IStream;
+import model.Client;
 import model.ServiceRequest;
 
 public class RecordRequestView extends View {
@@ -47,15 +48,19 @@ public class RecordRequestView extends View {
         );
 	}
 
-	public void displayServiceRequestCreated(String clientName, String dateTime, int serviceRequestId) {
+	public void displayServiceRequestCreated(ServiceRequest serviceRequest) {
+        String clientName    = serviceRequest.getClient().getName();
+        String dateTime      = serviceRequest.getDateOfRequest().toString();
+        int serviceRequestId = serviceRequest.getId();
         String message = "A new service request has been created for " 
                        + clientName + " at " + dateTime  + ".";
         message += "\nThe ID of this service request is " + serviceRequestId + ".";
         this.stream.printLine(message);
-	}
-	public boolean displayClientInfo(String clientName) {
+    }
+
+	public boolean displayClientInfo(Client client) {
         return this.prompter.promptYesNo(
-            "The I/C matched a client named '" + clientName + "'.\n", 
+            "The I/C matched a client named '" + client.getName() + "'.\n", 
             "Do you want to create a new service request for this client? "
         );
 	}

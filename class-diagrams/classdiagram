@@ -6,6 +6,7 @@ hide App fields
 class App {
     {static} +main(args: string[]): void
 }
+App --> MainController
 
 hide IDAOFactory fields
 class IDAOFactory <<interface>> {
@@ -13,14 +14,12 @@ class IDAOFactory <<interface>> {
     + getTechnicianDAO(): TechnicianDAO
     + getServiceRequestDAO(): ServiceRequestDAO
 }
-App ..> IDAOFactory : <<use>>
 
 hide IClientDAO fields
 class IClientDAO <<interface>> {
     + searchByIc(icNumber:String): Client
     + add(newClient: Client): void
 }
-IDAOFactory ..> IClientDAO : <<use>>
 
 hide ITechnicianDAO fields
 class ITechnicianDAO <<interface>> {
@@ -28,7 +27,6 @@ class ITechnicianDAO <<interface>> {
     + add(newTechnician: Technician): void
     + getById(technicianId: String): Technician
 }
-IDAOFactory ..> ITechnicianDAO : <<use>>
 
 hide IServiceRequestDAO fields
 class IServiceRequestDAO <<interface>> {
@@ -37,20 +35,19 @@ class IServiceRequestDAO <<interface>> {
     + getPending(): Collection<ServiceRequest>
     + getAssigned(): ArrayList<ServiceRequest>
 }
-IDAOFactory ..> IServiceRequestDAO : <<use>>
 
 class Client {
     - icNumber: String
     - address: String
     + <<create>>(icNumber: String, address: String)
 }
-IClientDAO ..> Client: <<use>>
+IClientDAO --> Client
 
 class Technician {
     - id: String
     + <<create>>(id: String, name: String, phoneNumber: String)
 }
-ITechnicianDAO ..> Technician: <<use>>
+ITechnicianDAO --> Technician
 
 class ServiceRequest {
     - id: int
@@ -64,7 +61,7 @@ class ServiceRequest {
     + isAssigned(): boolean
     + setTechnician(techinician: Technician, date: dateOfService): void
 } 
-IServiceRequestDAO ..> ServiceRequest: <<use>>
+IServiceRequestDAO --> ServiceRequest
 ServiceRequest --> Client
 ServiceRequest --> Technician
 
@@ -85,14 +82,46 @@ class ViewFactory {
     +createRecordRequestView(): RecordRequestView
     +createRecordServiceChargeView(): RecordServiceChargeView
 }
-App --> ViewFactory
 
 class MainView  {
     + <<create>>(stream: IStream)
     + displayMenu(): String
     + displayGoodBye(): String
 }
-ViewFactory --> MainView
+
+class RecordRequestView {
+    + <<create>>(stream: IStream)
+    + getIc(): String
+    + displayClientNotExist(): boolean
+    + getName(): String
+    + getPhoneNum(): String
+    + getAddress(): String
+    + displayServiceRequestCreated(serviceRequest: ServiceRequest): void
+    + displayClientInfo(client: Client): boolean
+}
+RecordRequestView --> ServiceRequest
+RecordRequestView --> Client
+
+class AssignTechnicianView  {
+    + <<create>>(stream: IStream)
+    + displayServiceRequests(serviceRequest: ArrayList<ServiceRequest>): int
+    + displayTechnicians(technicians: ArrayList<Technician>): String
+    + getDateOfService(): Date
+    + displaySuccess(serviceRequest: ServiceRequest): void
+    + displayNoPendingServiceRequest(): void
+}
+AssignTechnicianView --> ServiceRequest
+AssignTechnicianView --> Technician
+
+class RecordServiceChargeView {
+    + <<create>>(stream: IStream)
+    + displayServiceRequests(serviceRequests: ArrayList<ServiceRequest>): int
+    + getServiceCharge(): double
+    + displaySuccess(): void
+    + displayNoAssignedServiceRequest(): void
+}
+RecordServiceChargeView --> ServiceRequest
+
 
 class View {
     # stream: IStream
@@ -102,6 +131,9 @@ class View {
     + displayTable(header: String, rows: ArrayList<String>): void
 }
 View <|-- MainView
+View <|-- RecordRequestView
+View <|-- AssignTechnicianView
+View <|-- RecordServiceChargeView
 
 class Prompter {
     - stream: IStream
@@ -134,6 +166,53 @@ class ControllerFactory {
     + createAssignTechnicianController(): AssignTechnicianController
     + createRecordServiceChargeController(): RecordServiceChargeController
 }
-App ..> ControllerFactory : <<use>>
+ControllerFactory ..> IDAOFactory : <<use>>
+
+hide IController fields
+class IController <<interface>> {
+    + run(): boolean
+}
+
+class MainController implements IController {
+    - view: MainView
+    - controllerFactory: ControllerFactory
+    + <<create>>(controllerFactory: ControllerFactory, viewFactory: ViewFactory)
+    + run(): boolean
+}
+MainController --> ControllerFactory
+MainController --> ViewFactory
+MainController --> MainView
+MainController ..> IController : <<use>>
+
+class RecordRequestController implements IController {
+    - view: RecordRequestView
+	- clientDAO: IClientDAO
+    - serviceRequestDAO: IServiceRequestDAO
+    + <<create>>(view: RecordRequestView, clientDAO: IClientDAO, serviceRequestDAO: IServiceRequestDAO)
+    + run(): boolean
+}
+RecordRequestController --> RecordRequestView
+RecordRequestController ..> IClientDAO : <<use>>
+RecordRequestController ..> IServiceRequestDAO : <<use>>
+
+class AssignTechnicianController implements IController {
+    - view: AssignTechnicianView
+    - technicianDAO: ITechnicianDAO
+    - serviceRequestDAO: IServiceRequestDAO
+    + <<create>>(view: AssignTechnicianView, technicianDAO: ITechnicianDAO, serviceRequestDAO: IServiceRequestDAO)
+    + run(): boolean
+}
+AssignTechnicianController --> AssignTechnicianView
+AssignTechnicianController ..> ITechnicianDAO : <<use>>
+AssignTechnicianController ..> IServiceRequestDAO : <<use>>
+
+class RecordServiceChargeController implements IController {
+    - view: RecordServiceChargeView
+    - serviceRequestDAO: IServiceRequestDAO
+    + <<create>>(view: RecordServiceChargeView, serviceRequestDAO: IServiceRequestDAO)
+    + run(): boolean
+}
+RecordServiceChargeController --> RecordServiceChargeView
+RecordServiceChargeController ..> IServiceRequestDAO : <<use>>
 
 @enduml
