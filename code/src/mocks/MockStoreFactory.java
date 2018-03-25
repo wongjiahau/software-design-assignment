@@ -44,8 +44,7 @@ public class MockStoreFactory {
         ServiceRequest serviceRequest1 = new ServiceRequest(this.client1);
         ServiceRequest serviceRequest2 = new ServiceRequest(this.client2);
         ServiceRequest serviceRequest3 = new ServiceRequest(this.client3);
-        serviceRequest2.setTechnician(this.technician1);
-        serviceRequest2.setDateOfService(new Date());
+        serviceRequest2.setTechnician(this.technician1, new Date());
         serviceRequestStore.add(serviceRequest1);
         serviceRequestStore.add(serviceRequest2);
         serviceRequestStore.add(serviceRequest3);
