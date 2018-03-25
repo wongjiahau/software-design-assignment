@@ -3,27 +3,27 @@ package control;
 import java.util.ArrayList;
 
 import boundary.RecordServiceChargeView;
+import dao.IServiceRequestDAO;
 import model.ServiceRequest;
-import model.ServiceRequestStore;
 
 public class RecordServiceChargeController implements IController {
 	private RecordServiceChargeView view;
-	private ServiceRequestStore serviceRequestStore;
-	public RecordServiceChargeController(RecordServiceChargeView view, ServiceRequestStore serviceRequestStore) {
+	private IServiceRequestDAO serviceRequestDAO;
+	public RecordServiceChargeController(RecordServiceChargeView view, IServiceRequestDAO serviceRequestDAO) {
 		super();
 		this.view = view;
-		this.serviceRequestStore = serviceRequestStore;
+		this.serviceRequestDAO = serviceRequestDAO;
 	}
 
 	@Override
 	public boolean run() {
-		ArrayList<ServiceRequest> allAssignedServiceRequest = this.serviceRequestStore.getAssigned();
+		ArrayList<ServiceRequest> allAssignedServiceRequest = this.serviceRequestDAO.getAssigned();
 		if(allAssignedServiceRequest.size() == 0) {
 			this.view.displayNoAssignedServiceRequest();
 			return false;
 		}
 		int serviceRequestId                = this.view.displayServiceRequests(allAssignedServiceRequest);
-		ServiceRequest chosenServiceRequest = this.serviceRequestStore.getById(serviceRequestId);
+		ServiceRequest chosenServiceRequest = this.serviceRequestDAO.getById(serviceRequestId);
 		double serviceCharge                = this.view.getServiceCharge();
 		chosenServiceRequest.setCharge(serviceCharge);
 		this.view.displaySuccess();

@@ -5,39 +5,39 @@ import java.util.Collection;
 import java.util.Date;
 
 import boundary.AssignTechnicianView;
+import dao.IServiceRequestDAO;
+import dao.ITechnicianDAO;
 import model.ServiceRequest;
-import model.ServiceRequestStore;
 import model.Technician;
-import model.TechnicianStore;
 
 public class AssignTechnicianController implements IController {
 	private AssignTechnicianView view;
-	private TechnicianStore technicianStore;
-	private ServiceRequestStore serviceRequestStore;
+	private ITechnicianDAO technicianDAO;
+	private IServiceRequestDAO serviceRequestDAO;
 
 	public AssignTechnicianController(
 		AssignTechnicianView view,
-		TechnicianStore technicianStore,
-		ServiceRequestStore serviceRequestStore
+		ITechnicianDAO technicianDAO,
+		IServiceRequestDAO serviceRequestDAO
 	) {
 		super();
 		this.view                = view;
-		this.technicianStore     = technicianStore;
-		this.serviceRequestStore = serviceRequestStore;
+		this.technicianDAO     = technicianDAO;
+		this.serviceRequestDAO = serviceRequestDAO;
 	}
 
 	@Override
 	public boolean run() {
-		Collection<ServiceRequest> pendingServiceRequests = this.serviceRequestStore.getPending();
+		Collection<ServiceRequest> pendingServiceRequests = this.serviceRequestDAO.getPending();
 		if(pendingServiceRequests.size() == 0) {
 			this.view.displayNoPendingServiceRequest();
 			return false;
 		}
 		int serviceRequestId                              = this.view.displayServiceRequests(new ArrayList<ServiceRequest>(pendingServiceRequests));
-		ServiceRequest chosenServiceRequest               = this.serviceRequestStore.getById(serviceRequestId);
-		Collection<Technician> allTehnicians              = this.technicianStore.getAll();
+		ServiceRequest chosenServiceRequest               = this.serviceRequestDAO.getById(serviceRequestId);
+		Collection<Technician> allTehnicians              = this.technicianDAO.getAll();
 		String technicianId                               = this.view.displayTechnicians(new ArrayList<Technician>(allTehnicians));
-		Technician chosenTechnician                       = this.technicianStore.getById(technicianId);
+		Technician chosenTechnician                       = this.technicianDAO.getById(technicianId);
 		Date dateOfService                                = this.view.getDateOfService();
 		chosenServiceRequest.setTechnician(chosenTechnician, dateOfService);
 		this.view.displaySuccess(chosenServiceRequest);

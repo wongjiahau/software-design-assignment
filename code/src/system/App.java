@@ -5,19 +5,19 @@ import boundary.ViewFactory;
 import control.ControllerFactory;
 import control.IController;
 import control.MainController;
+import dao.IDAOInitiator;
 import libs.ConsoleStream;
-import mocks.MockStoreFactory;
-import model.IStoreFactory;
+import mocks.MockDAOInitiator;
 
 public class App {
     public static void main(String[] args) {
-        IStoreFactory storeFactory              = new MockStoreFactory();
+        IDAOInitiator DAOFactory              = new MockDAOInitiator();
         ViewFactory viewFactory                 = new ViewFactory(new ConsoleStream());
         ControllerFactory controllerFactory     = new ControllerFactory(
             viewFactory,
-            storeFactory.createClientStore(),
-            storeFactory.createTechnicianStore(),
-            storeFactory.createServiceRequestStore()
+            DAOFactory.getClientDAO(),
+            DAOFactory.getTechnicianDAO(),
+            DAOFactory.getServiceRequestDAO()
         );
         IController controller = new MainController(controllerFactory, viewFactory);
         while(controller.run());

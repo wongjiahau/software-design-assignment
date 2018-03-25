@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+    echo "One arugment must be provided";
+    exit 1;
+fi;
+java -jar plantuml.jar $1
+xdg-open $1.png

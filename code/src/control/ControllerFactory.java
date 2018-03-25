@@ -1,49 +1,49 @@
 package control;
 
 import boundary.ViewFactory;
-import model.ClientStore;
-import model.ServiceRequestStore;
-import model.TechnicianStore;
+import dao.IClientDAO;
+import dao.IServiceRequestDAO;
+import dao.ITechnicianDAO;
 
 public class ControllerFactory {
     private ViewFactory viewFactory;
-    private ClientStore clientStore;
-    private TechnicianStore technicianStore;
-    private ServiceRequestStore serviceRequestStore;
+    private IClientDAO clientDAO;
+    private ITechnicianDAO technicianDAO;
+    private IServiceRequestDAO serviceRequestDAO;
 
     public ControllerFactory(
         ViewFactory viewFactory, 
-        ClientStore clientStore, 
-        TechnicianStore technicianStore,
-        ServiceRequestStore serviceRequestStore
+        IClientDAO clientDAO, 
+        ITechnicianDAO technicianDAO,
+        IServiceRequestDAO serviceRequestDAO
     ) {
         super();
         this.viewFactory = viewFactory;
-        this.clientStore = clientStore;
-        this.technicianStore = technicianStore;
-        this.serviceRequestStore = serviceRequestStore;
+        this.clientDAO = clientDAO;
+        this.technicianDAO = technicianDAO;
+        this.serviceRequestDAO = serviceRequestDAO;
     }
 
     public RecordRequestController createRecordRequestController() {
         return new RecordRequestController(
             this.viewFactory.createRecordRequestView(),
-            this.clientStore, 
-            this.serviceRequestStore
+            this.clientDAO, 
+            this.serviceRequestDAO
         );
     }
 
     public AssignTechnicianController createAssignTechnicianController() {
         return new AssignTechnicianController(
             this.viewFactory.createAssignTechnicianView(),
-            this.technicianStore,
-            this.serviceRequestStore
+            this.technicianDAO,
+            this.serviceRequestDAO
         );
     }
 
     public RecordServiceChargeController createRecordServiceChargeController() {
         return new RecordServiceChargeController(
             this.viewFactory.createRecordServiceChargeView(),
-            this.serviceRequestStore
+            this.serviceRequestDAO
         );
     }
 

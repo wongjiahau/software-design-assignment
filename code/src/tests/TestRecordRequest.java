@@ -9,21 +9,22 @@ import org.junit.Test;
 import boundary.ViewFactory;
 import control.IController;
 import control.RecordRequestController;
-import mocks.MockStoreFactory;
+import dao.IClientDAO;
+import dao.IServiceRequestDAO;
+import mocks.MockDAOInitiator;
+import mocks.MockServiceRequestDAO;
 import mocks.MockStream;
-import model.ClientStore;
-import model.ServiceRequestStore;
 
 public class TestRecordRequest {
 	private MockStream mockStream;
-	private ClientStore clientStore;
-	private ServiceRequestStore serviceRequestStore;
+	private IClientDAO clientDAO;
+	private IServiceRequestDAO serviceRequestDAO;
 	public RecordRequestController getController(ArrayList<String> inputLines) {
 		this.mockStream = new MockStream(inputLines);
 		ViewFactory viewFactory = new ViewFactory(this.mockStream);
-		this.clientStore = new MockStoreFactory().createClientStore();
-		this.serviceRequestStore = new ServiceRequestStore();
-		return new RecordRequestController(viewFactory.createRecordRequestView(), clientStore, serviceRequestStore);
+		this.clientDAO = new MockDAOInitiator().getClientDAO();
+		this.serviceRequestDAO = new MockServiceRequestDAO();
+		return new RecordRequestController(viewFactory.createRecordRequestView(), clientDAO, serviceRequestDAO);
 	}
 
 	@Test 
@@ -56,8 +57,8 @@ public class TestRecordRequest {
 		inputLines.add("UTAR Sungai Long");
 		IController controller = this.getController(inputLines);
 		controller.run();
-		assertEquals(this.clientStore.searchByIc(ic).getName(), name);
-		assertEquals(this.serviceRequestStore.getLastInserted().getClient().getIcNumber(), ic);
+		assertEquals(this.clientDAO.searchByIc(ic).getName(), name);
+		assertEquals(this.serviceRequestDAO.getLastInserted().getClient().getIcNumber(), ic);
 		String expectedOutput = ""
 			+ "Enter client's I/C number\n"
 			+ ">> "

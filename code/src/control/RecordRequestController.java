@@ -1,31 +1,31 @@
 package control;
 
 import boundary.RecordRequestView;
+import dao.IClientDAO;
+import dao.IServiceRequestDAO;
 import model.Client;
-import model.ClientStore;
 import model.ServiceRequest;
-import model.ServiceRequestStore;
 
 public class RecordRequestController implements IController {
 	private RecordRequestView view;
-	private ClientStore clientStore;
-	private ServiceRequestStore serviceRequestStore;
+	private IClientDAO clientDAO;
+	private IServiceRequestDAO serviceRequestDAO;
 
 	public RecordRequestController(
 		RecordRequestView view, 
-		ClientStore clientStore, 
-		ServiceRequestStore serviceRequestStore
+		IClientDAO clientDAO, 
+		IServiceRequestDAO serviceRequestDAO
 	) {
 		super();
 		this.view                = view;
-		this.clientStore         = clientStore;
-		this.serviceRequestStore = serviceRequestStore;
+		this.clientDAO         = clientDAO;
+		this.serviceRequestDAO = serviceRequestDAO;
 	}
 
 	@Override
 	public boolean run() {
 		String clientIc = this.view.getIc();
-		Client client = this.clientStore.searchByIc(clientIc);
+		Client client = this.clientDAO.searchByIc(clientIc);
 		if (client == null) {
 			if (!this.view.displayClientNotExist()) {
 				return false;
@@ -34,12 +34,12 @@ public class RecordRequestController implements IController {
 			String phoneNum = this.view.getPhoneNum();
 			String address = this.view.getAddress();
 			client = new Client(clientIc, name, phoneNum, address);
-			this.clientStore.add(client);
+			this.clientDAO.add(client);
 		} else if (!this.view.displayClientInfo(client.getName())) {
 			return false;
 		}
 		ServiceRequest newServiceRequest = new ServiceRequest(client);
-		this.serviceRequestStore.add(newServiceRequest);
+		this.serviceRequestDAO.add(newServiceRequest);
 		this.view.displayServiceRequestCreated(newServiceRequest);
 		return true;
 	}

@@ -2,31 +2,31 @@
 title Assign technicians
 actor Manager
 boundary "view:\nAssignTechnicianView" as view
-entity "technicianStore:\nTechnicianStore" as tstore
-entity "serviceRequestStore:\nServiceRequestStore" as srstore
+entity "technicianDAO:\nTechnicianDAO" as tDAO
+entity "serviceRequestDAO:\nServiceRequestDAO" as srDAO
 control MainController
 
 Manager -> MainController : assignTechnician()
 create control AssignTechnicianController as controller
-MainController -> controller : <<create>>(view, technicianStore, serviceRequestStore)
+MainController -> controller : <<create>>(view, technicianDAO, serviceRequestDAO)
 controller --> MainController
 MainController -> controller : run()
-controller -> srstore : getPending()
-srstore --> controller : pendingServiceRequests
+controller -> srDAO : getPending()
+srDAO --> controller : pendingServiceRequests
 alt pendingServiceRequests.length == 0
     controller -> view : displayNoPendingServiceRequest()
     view --> controller
 else
     controller -> view : displayServiceRequests(assignedServiceRequests)
     view --> controller : serviceRequestId
-    controller -> srstore : getById(serviceRequestId)
-    srstore --> controller : chosenServiceRequest
-    controller -> tstore : getAll()
-    tstore --> controller : allTechnicians
+    controller -> srDAO : getById(serviceRequestId)
+    srDAO --> controller : chosenServiceRequest
+    controller -> tDAO : getAll()
+    tDAO --> controller : allTechnicians
     controller -> view : displayTechnicians
     view --> controller : technicianId
-    controller -> tstore : getById(technicianId)
-    tstore --> controller : chosenTechnician
+    controller -> tDAO : getById(technicianId)
+    tDAO --> controller : chosenTechnician
     controller -> view : getDateOfService()
     view --> controller : dateOfService
     controller -> chosenServiceRequest : setTechnician(chosenTechnician, dateOfService)

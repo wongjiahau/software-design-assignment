@@ -2,19 +2,19 @@
 title Record request for service
 actor Manager
 boundary "view:\nRecordRequestView" as view
-entity "clientStore:\nClientStore" as clientStore
-entity "serviceRequestStore:\nServiceRequestStore" as serviceRequestStore
+entity "clientDAO:\nClientDAO" as clientDAO
+entity "serviceRequestDAO:\nServiceRequestDAO" as serviceRequestDAO
 control MainController
 
 Manager -> MainController : recordRequestForService()
 create control RecordRequestController 
-MainController -> RecordRequestController : <<create>>(view, clientStore, serviceRequestStore)
+MainController -> RecordRequestController : <<create>>(view, clientDAO, serviceRequestDAO)
 RecordRequestController --> MainController
 MainController -> RecordRequestController : run()
 RecordRequestController -> view : getIc()
 view --> RecordRequestController : clientIc
-RecordRequestController -> clientStore : searchByIc(clientIc)
-clientStore --> RecordRequestController : client
+RecordRequestController -> clientDAO : searchByIc(clientIc)
+clientDAO --> RecordRequestController : client
 alt client == null
     RecordRequestController -> view : getName()
     view --> RecordRequestController : name
@@ -25,14 +25,14 @@ alt client == null
     create "client:\nClient" as client
     RecordRequestController -> client : <<create>>(clientIc, name, phoneNum, address)
     client --> RecordRequestController : client
-    RecordRequestController -> clientStore : add(client)
-    clientStore --> RecordRequestController
+    RecordRequestController -> clientDAO : add(client)
+    clientDAO --> RecordRequestController
 end
 create "serviceRequest:\nServiceRequest" as serviceRequest
 RecordRequestController -> serviceRequest : <<create>>(client)
 serviceRequest --> RecordRequestController : serviceRequest
-RecordRequestController -> serviceRequestStore : add(serviceRequest)
-serviceRequestStore --> RecordRequestController
+RecordRequestController -> serviceRequestDAO : add(serviceRequest)
+serviceRequestDAO --> RecordRequestController
 RecordRequestController -> view : displayServiceRequestCreated(serviceRequest)
 view --> RecordRequestController
 RecordRequestController --> MainController 

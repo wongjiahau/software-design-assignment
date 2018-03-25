@@ -1,0 +1,27 @@
+@startuml
+hide circle
+hide members
+skinparam classAttributeIconSize 0
+
+show App methods
+class App {
+    {static} main(args: string[]): void
+}
+
+show IStoreFactory methods
+class IStoreFactory <<interface>> {
+	createClientStore(): ClientStore
+    createTechnicianStore(): TechnicianStore
+    createServiceRequestStore(): ServiceRequestStore
+}
+
+
+
+App ..> IStoreFactory : <<uses>>
+class System << ("",#FF7700)Singleton >>
+Class01 <|-- Class02
+Class03 *-- Class04
+Class05 o-- Class06
+Class07 .. Class08
+Class09 -- Class10
+@enduml
