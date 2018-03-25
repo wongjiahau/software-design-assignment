@@ -56,6 +56,7 @@ public class RecordRequestView extends View {
                        + clientName + " at " + dateTime  + ".";
         message += "\nThe ID of this service request is " + serviceRequestId + ".";
         this.stream.printLine(message);
+        super.stream.pressAnyKeyToContinue();
     }
 
 	public boolean displayClientInfo(Client client) {
