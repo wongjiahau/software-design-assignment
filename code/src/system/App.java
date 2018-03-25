@@ -7,22 +7,17 @@ import control.IController;
 import control.MainController;
 import libs.ConsoleStream;
 import mocks.MockStoreFactory;
-import model.ClientStore;
-import model.ServiceRequestStore;
-import model.TechnicianStore;
+import model.IStoreFactory;
 
 public class App {
     public static void main(String[] args) {
-        MockStoreFactory mockStoreFactory       = new MockStoreFactory();
-        ClientStore clientStore                 = mockStoreFactory.createMockClientStore();
-        TechnicianStore technicianStore         = mockStoreFactory.createMockTechnicianStore();
-        ServiceRequestStore serviceRequestStore = mockStoreFactory.createMockServiceRequestStore();
+        IStoreFactory storeFactory              = new MockStoreFactory();
         ViewFactory viewFactory                 = new ViewFactory(new ConsoleStream());
         ControllerFactory controllerFactory     = new ControllerFactory(
             viewFactory,
-            clientStore,
-            technicianStore,
-            serviceRequestStore
+            storeFactory.createClientStore(),
+            storeFactory.createTechnicianStore(),
+            storeFactory.createServiceRequestStore()
         );
         IController controller = new MainController(controllerFactory, viewFactory);
         while(controller.run());

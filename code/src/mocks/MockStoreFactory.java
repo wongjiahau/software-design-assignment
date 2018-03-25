@@ -4,12 +4,13 @@ import java.util.Date;
 
 import model.Client;
 import model.ClientStore;
+import model.IStoreFactory;
 import model.ServiceRequest;
 import model.ServiceRequestStore;
 import model.Technician;
 import model.TechnicianStore;
 
-public class MockStoreFactory {
+public class MockStoreFactory implements IStoreFactory {
     private Client client1;
     private Client client2;
     private Client client3;
@@ -23,14 +24,14 @@ public class MockStoreFactory {
         this.client3 = new Client("880808-08-8888", "Ah Huat", "018-8888888", "18-8-8, Taman Gembira, OUG");
     }
 
-    public ClientStore createMockClientStore() {
+    public ClientStore createClientStore() {
         ClientStore clientStore = new ClientStore();
         clientStore.add(this.client1);
         clientStore.add(this.client2);
         return clientStore;
     }
 
-    public TechnicianStore createMockTechnicianStore() {
+    public TechnicianStore createTechnicianStore() {
         this.technician1 = new Technician("T0001", "Bob Chan", "014-5673829");
         this.technician2 = new Technician("T0002", "Bob Connor", "019-8765432");
         TechnicianStore technicianStore = new TechnicianStore();
@@ -39,11 +40,11 @@ public class MockStoreFactory {
         return technicianStore;
     }
 
-    public ServiceRequestStore createMockServiceRequestStore() {
+    public ServiceRequestStore createServiceRequestStore() {
         ServiceRequestStore serviceRequestStore = new ServiceRequestStore();
-        ServiceRequest serviceRequest1 = new ServiceRequest(this.client1);
-        ServiceRequest serviceRequest2 = new ServiceRequest(this.client2);
-        ServiceRequest serviceRequest3 = new ServiceRequest(this.client3);
+        ServiceRequest serviceRequest1          = new ServiceRequest(this.client1);
+        ServiceRequest serviceRequest2          = new ServiceRequest(this.client2);
+        ServiceRequest serviceRequest3          = new ServiceRequest(this.client3);
         serviceRequest2.setTechnician(this.technician1, new Date());
         serviceRequestStore.add(serviceRequest1);
         serviceRequestStore.add(serviceRequest2);
