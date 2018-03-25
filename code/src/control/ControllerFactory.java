@@ -1,49 +1,37 @@
 package control;
 
 import boundary.ViewFactory;
-import dao.IClientDAO;
-import dao.IServiceRequestDAO;
-import dao.ITechnicianDAO;
+import dao.IDAOFactory;
 
 public class ControllerFactory {
     private ViewFactory viewFactory;
-    private IClientDAO clientDAO;
-    private ITechnicianDAO technicianDAO;
-    private IServiceRequestDAO serviceRequestDAO;
+    private IDAOFactory daoFactory;
 
-    public ControllerFactory(
-        ViewFactory viewFactory, 
-        IClientDAO clientDAO, 
-        ITechnicianDAO technicianDAO,
-        IServiceRequestDAO serviceRequestDAO
-    ) {
+    public ControllerFactory( ViewFactory viewFactory, IDAOFactory daoFactory) {
         super();
         this.viewFactory = viewFactory;
-        this.clientDAO = clientDAO;
-        this.technicianDAO = technicianDAO;
-        this.serviceRequestDAO = serviceRequestDAO;
     }
 
     public RecordRequestController createRecordRequestController() {
         return new RecordRequestController(
             this.viewFactory.createRecordRequestView(),
-            this.clientDAO, 
-            this.serviceRequestDAO
+            this.daoFactory.getClientDAO(), 
+            this.daoFactory.getServiceRequestDAO()
         );
     }
 
     public AssignTechnicianController createAssignTechnicianController() {
         return new AssignTechnicianController(
             this.viewFactory.createAssignTechnicianView(),
-            this.technicianDAO,
-            this.serviceRequestDAO
+            this.daoFactory.getTechnicianDAO(),
+            this.daoFactory.getServiceRequestDAO()
         );
     }
 
     public RecordServiceChargeController createRecordServiceChargeController() {
         return new RecordServiceChargeController(
             this.viewFactory.createRecordServiceChargeView(),
-            this.serviceRequestDAO
+            this.daoFactory.getServiceRequestDAO()
         );
     }
 
