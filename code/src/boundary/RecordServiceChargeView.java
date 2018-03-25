@@ -31,7 +31,7 @@ public class RecordServiceChargeView extends View {
 	}
 
 	public void displaySuccess() {
-        this.stream.printLine("The entered service charge bad been recorded\nfor the chosen service request");
+        this.stream.printLine("The entered service charge had been recorded\nfor the chosen service request");
         this.stream.pressAnyKeyToContinue();
 	}
 
