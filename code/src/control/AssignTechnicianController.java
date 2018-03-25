@@ -39,8 +39,7 @@ public class AssignTechnicianController implements IController {
 		String technicianId                               = this.view.displayTechnicians(new ArrayList<Technician>(allTehnicians));
 		Technician chosenTechnician                       = this.technicianStore.getById(technicianId);
 		Date dateOfService                                = this.view.getDateOfService();
-		chosenServiceRequest.setTechnician(chosenTechnician);
-		chosenServiceRequest.setDateOfService(dateOfService);
+		chosenServiceRequest.setTechnician(chosenTechnician, dateOfService);
 		this.view.displaySuccess(chosenServiceRequest);
 		return true;
 	}

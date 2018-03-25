@@ -46,10 +46,6 @@ public class ServiceRequest {
 		return dateOfService;
 	}
 
-	public void setDateOfService(Date dateOfService) {
-		this.dateOfService = dateOfService;
-	}
-
 	public double getCharge() {
 		return charge;
 	}
@@ -66,7 +62,13 @@ public class ServiceRequest {
 		return technician;
 	}
 
-	public void setTechnician(Technician technician) {
+	public void setTechnician(Technician technician, Date dateOfService) {
 		this.technician = technician;
+		this.setDateOfService(dateOfService);
 	}
+
+	private void setDateOfService(Date dateOfService) {
+		this.dateOfService = dateOfService;
+	}
+
 }
