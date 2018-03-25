@@ -11,7 +11,7 @@ import control.IController;
 import control.RecordRequestController;
 import dao.IClientDAO;
 import dao.IServiceRequestDAO;
-import mocks.MockDAOInitiator;
+import mocks.MockDAOFactory;
 import mocks.MockServiceRequestDAO;
 import mocks.MockStream;
 
@@ -22,7 +22,7 @@ public class TestRecordRequest {
 	public RecordRequestController getController(ArrayList<String> inputLines) {
 		this.mockStream = new MockStream(inputLines);
 		ViewFactory viewFactory = new ViewFactory(this.mockStream);
-		this.clientDAO = new MockDAOInitiator().getClientDAO();
+		this.clientDAO = new MockDAOFactory().getClientDAO();
 		this.serviceRequestDAO = new MockServiceRequestDAO();
 		return new RecordRequestController(viewFactory.createRecordRequestView(), clientDAO, serviceRequestDAO);
 	}

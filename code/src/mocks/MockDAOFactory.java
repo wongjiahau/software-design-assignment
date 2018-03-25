@@ -3,21 +3,21 @@ package mocks;
 import java.util.Date;
 
 import dao.IClientDAO;
-import dao.IDAOInitiator;
+import dao.IDAOFactory;
 import dao.IServiceRequestDAO;
 import dao.ITechnicianDAO;
 import model.Client;
 import model.ServiceRequest;
 import model.Technician;
 
-public class MockDAOInitiator implements IDAOInitiator {
+public class MockDAOFactory implements IDAOFactory {
     private Client client1;
     private Client client2;
     private Client client3;
     private Technician technician1;
     private Technician technician2;
 
-    public MockDAOInitiator() {
+    public MockDAOFactory() {
         super();
         this.client1 = new Client("960819-43-5437", "Ali", "011-8274382", "17-3-8, Winner Court B, Desa Petaling");
         this.client2 = new Client("971231-12-1234", "John", "012-3456789", "Lot 10, Jln Redang, Bukit Serdang");

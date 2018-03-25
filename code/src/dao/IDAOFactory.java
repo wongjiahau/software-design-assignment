@@ -1,6 +1,6 @@
 package dao;
 
-public interface IDAOInitiator {
+public interface IDAOFactory {
 
     IClientDAO getClientDAO();
 

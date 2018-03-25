@@ -5,15 +5,15 @@ import boundary.ViewFactory;
 import control.ControllerFactory;
 import control.IController;
 import control.MainController;
-import dao.IDAOInitiator;
+import dao.IDAOFactory;
 import libs.ConsoleStream;
-import mocks.MockDAOInitiator;
+import mocks.MockDAOFactory;
 
 public class App {
     public static void main(String[] args) {
-        IDAOInitiator DAOFactory              = new MockDAOInitiator();
-        ViewFactory viewFactory                 = new ViewFactory(new ConsoleStream());
-        ControllerFactory controllerFactory     = new ControllerFactory(
+        IDAOFactory DAOFactory            = new MockDAOFactory();
+        ViewFactory viewFactory             = new ViewFactory(new ConsoleStream());
+        ControllerFactory controllerFactory = new ControllerFactory(
             viewFactory,
             DAOFactory.getClientDAO(),
             DAOFactory.getTechnicianDAO(),
