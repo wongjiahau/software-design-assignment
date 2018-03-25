@@ -47,10 +47,7 @@ public class RecordRequestView extends View {
         );
 	}
 
-	public void displayServiceRequestCreated(ServiceRequest newServiceRequest) {
-        String clientName       = newServiceRequest.getClient().getName();
-        String dateTime         = newServiceRequest.getDateOfRequest().toString();
-        int serviceRequestId = newServiceRequest.getId();
+	public void displayServiceRequestCreated(String clientName, String dateTime, int serviceRequestId) {
         String message = "A new service request has been created for " 
                        + clientName + " at " + dateTime  + ".";
         message += "\nThe ID of this service request is " + serviceRequestId + ".";

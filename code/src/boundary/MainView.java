@@ -3,8 +3,8 @@ package boundary;
 import libs.IStream;
 
 public class MainView extends View {
-    public MainView(IStream ioStream) {
-        super(ioStream);
+    public MainView(IStream stream) {
+        super(stream);
     }
 
     public String displayMenu() {

@@ -85,5 +85,55 @@ class ViewFactory {
     +createRecordRequestView(): RecordRequestView
     +createRecordServiceChargeView(): RecordServiceChargeView
 }
+App --> ViewFactory
+
+class MainView  {
+    + <<create>>(stream: IStream)
+    + displayMenu(): String
+    + displayGoodBye(): String
+}
+ViewFactory --> MainView
+
+class View {
+    # stream: IStream
+    # prompter: Prompter
+    # displayTitle(title: String): void
+    + <<create>>(stream: IStream)
+    + displayTable(header: String, rows: ArrayList<String>): void
+}
+View <|-- MainView
+
+class Prompter {
+    - stream: IStream
+    + <<create>>(stream: IStream)
+    + prompt(prompt: String, regexPattern: String, errorMessage: String): String
+    + propmtYesNo(prompt: String): boolean
+    + promptInteger(prompt: String): int
+    + promptDouble(prompt: String): double
+    + promptForStringId(prompt: String, validIds: ArrayList<String>): String
+    + promptForIntegerId(prompt: String , validIds: ArrayList<Integer>): int
+    + promptDate(prompt: String): Date
+}
+View --> Prompter
+
+hide IStream fields
+class IStream <<interface>> {
+    + getNextLine(): String
+    + print(message: String): void
+    + printLine(message: String): void
+    + pressAnyKeyToContinue(): void
+}
+View ..> IStream : <<use>>
+Prompter ..> IStream : <<use>>
+
+class ControllerFactory {
+    - viewFactory: ViewFactory
+    - daoFactory: IDAOFactory
+    + <<create>>(viewFactory: ViewFactory, daoFactory: IDAOFactory)
+    + createRecordRequestController(): RecordRequestController
+    + createAssignTechnicianController(): AssignTechnicianController
+    + createRecordServiceChargeController(): RecordServiceChargeController
+}
+App ..> ControllerFactory : <<use>>
 
 @enduml
