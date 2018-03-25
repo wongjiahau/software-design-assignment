@@ -10,6 +10,7 @@ public class ControllerFactory {
     public ControllerFactory( ViewFactory viewFactory, IDAOFactory daoFactory) {
         super();
         this.viewFactory = viewFactory;
+        this.daoFactory = daoFactory;
     }
 
     public RecordRequestController createRecordRequestController() {
