@@ -218,9 +218,23 @@ together {
 
     hide IDAOFactory fields
     class IDAOFactory <<interface>> {
-        + getClientDAO(): ClientDAO
-        + getTechnicianDAO(): TechnicianDAO
-        + getServiceRequestDAO(): ServiceRequestDAO
+        + getClientDAO(): IClientDAO
+        + getTechnicianDAO(): ITechnicianDAO
+        + getServiceRequestDAO(): IServiceRequestDAO
+    }
+    
+    hide DAOFactory fields
+    class DAOFactory implements IDAOFactory {
+        + /getClientDAO(): IClientDAO
+        + /getTechnicianDAO(): ITechnicianDAO
+        + /getServiceRequestDAO(): IServiceRequestDAO
+    }
+
+    hide MockDAOFactory fields
+    class MockDAOFactory implements IDAOFactory {
+        + /getClientDAO(): IClientDAO
+        + /getTechnicianDAO(): ITechnicianDAO
+        + /getServiceRequestDAO(): IServiceRequestDAO
     }
 }
 
@@ -234,6 +248,25 @@ class IStream <<interface>> {
 }
 View ..> IStream : <<use>>
 Prompter ..> IStream : <<use>>
+
+class ConsoleStream implements IStream {
+    + /getNextLine(): String
+    + /print(message: String): void
+    + /printLine(message: String): void
+    + /pressAnyKeyToContinue(): void
+}
+
+class MockStream implements IStream {
+    - printedLines: String
+    - inputLinesStack: Stack<String>
+    + /getNextLine(): String
+    + /print(message: String): void
+    + /printLine(message: String): void
+    + /pressAnyKeyToContinue(): void
+    + getPrintedLines(): String
+}
+
+
 
 
 
