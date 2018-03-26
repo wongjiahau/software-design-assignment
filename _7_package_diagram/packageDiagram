@@ -1,0 +1,59 @@
+@startuml
+hide circle
+hide members
+skinparam classAttributeIconSize 0
+
+package boundary {
+    View <|-- MainView
+    View <|-- RecordRequestView
+    View <|-- AssignTechnicianView
+    View <|-- RecordServiceChargeView
+    class ViewFactory
+}
+
+package control {
+    interface IController
+    IController <|-- MainController
+    IController <|-- RecordRequestController
+    IController <|-- AssignTechnicianController
+    IController <|-- RecordServiceChargeController
+    class ControllerFactory
+}
+
+package dao {
+    interface IDAOFactory
+    IDAOFactory <|-- DAOFactory
+    interface IClientDAO
+    interface IServiceRequestDAO
+    interface ITechnicianDAO
+    IDAOFactory ..> IClientDAO
+    IDAOFactory ..> IServiceRequestDAO
+    IDAOFactory ..> ITechnicianDAO
+}
+
+package libs {
+    interface IStream
+    IStream <|-- ConsoleStream
+    IStream <|-- MockStream
+    Prompter ..> IStream
+    class StringUtil
+}
+
+package model {
+    Contactable <|-- Client
+    Contactable <|-- Technician
+    ServiceRequest ..> Client
+    ServiceRequest ..> Technician
+}
+
+package system {
+    class App
+}
+
+boundary ..> libs
+boundary ..> model
+control ..> dao
+control ..> boundary
+dao ..> model
+system ..> control
+@enduml
