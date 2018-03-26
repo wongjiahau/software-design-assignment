@@ -16,7 +16,7 @@ srDAO --> controller : pendingServiceRequests
 alt pendingServiceRequests.length == 0
     controller -> view : displayNoPendingServiceRequest()
     view --> controller
-else
+else pendingServiceRequests.length > 0
     controller -> view : displayServiceRequests(assignedServiceRequests)
     view --> controller : serviceRequestId
     controller -> srDAO : getById(serviceRequestId)

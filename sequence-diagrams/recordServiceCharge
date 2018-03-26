@@ -2,7 +2,7 @@
 title Record service charge
 actor Manager
 boundary "view:\nRecordServiceChargeView" as view
-entity "DAO:\nDAO" as DAO
+entity "serviceRequestDAO:\nServiceRequestDAO" as DAO
 control MainController
 
 Manager -> MainController : recordServiceCharge()
@@ -15,7 +15,7 @@ DAO --> controller : assignedServiceRequests
 alt assignedServiceRequests.length == 0
     controller -> view : displayNoAssignedServiceRequest()
     view --> controller
-else
+else assignedServiceRequests.length > 0
     controller -> view : displayServiceRequests(assignedServiceRequests)
     view --> controller : serviceRequestId
     controller -> view : getServiceCharge()

@@ -6,4 +6,4 @@
 []-6-Design class diagram (show everything)
 []-7-Package diagram
 [X]-8 Source code listing
-[]-9 Update sequence diagram
+[X]-9 Update sequence diagram
