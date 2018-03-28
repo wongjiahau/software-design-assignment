@@ -9,5 +9,5 @@ public interface IServiceRequestDAO {
     public boolean add(ServiceRequest newServiceRequest);
     public ServiceRequest getById(int id);
 	public Collection<ServiceRequest> getPending();
-	public ArrayList<ServiceRequest> getAssigned();
+	public ArrayList<ServiceRequest> getOnGoing();
 }

@@ -36,7 +36,7 @@ public class RecordServiceChargeView extends View {
 	}
 
 	public void displayNoAssignedServiceRequest() {
-        this.stream.printLine("There are no assigned service request.");
+        this.stream.printLine("There are no on going service request.");
         this.stream.pressAnyKeyToContinue();
 	}
 }

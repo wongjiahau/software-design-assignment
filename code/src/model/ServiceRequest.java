@@ -24,9 +24,9 @@ public class ServiceRequest {
 	}
 
     /**
-     * Assigned service request are those that have a techinician associated but no service charge recorded yet
+     * On going service request are those that have a techinician associated but no service charge recorded yet
      */
-	public boolean isAssigned() {
+	public boolean isOnGoing() {
 		return !this.isPending() && this.charge == 0;
 	}
 

@@ -43,16 +43,16 @@ public class MockServiceRequestDAO extends MockDAO<ServiceRequest> implements IS
 		return pendingServiceRequests;
 	}
 
-	public ArrayList<ServiceRequest> getAssigned() {
+	public ArrayList<ServiceRequest> getOnGoing() {
         ArrayList<ServiceRequest> allServiceRequests = new ArrayList<ServiceRequest>(this.getAll());
-        ArrayList<ServiceRequest> assignedServiceRequests = new ArrayList<ServiceRequest>();
+        ArrayList<ServiceRequest> onGoingServiceRequests = new ArrayList<ServiceRequest>();
         for (int i = 0; i < allServiceRequests.size(); i++) {
             ServiceRequest serviceRequest = allServiceRequests.get(i);
-            if(serviceRequest.isAssigned()) {
-                assignedServiceRequests.add(serviceRequest);
+            if(serviceRequest.isOnGoing()) {
+                onGoingServiceRequests.add(serviceRequest);
             }
         }
-		return assignedServiceRequests;
+		return onGoingServiceRequests;
 	}
 
 }

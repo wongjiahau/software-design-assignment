@@ -27,7 +27,7 @@ together {
         + add(newServiceRequest: ServiceRequest): boolean
         + getById(id: int): ServiceRequest
         + getPending(): ServiceRequest[]
-        + getAssigned(): ServiceRequest[]
+        + getOnGoing(): ServiceRequest[]
     }
 }
 
@@ -54,7 +54,7 @@ together {
         - techinician: Technician
         + <<create>>(client: Client)
         + isPending(): boolean
-        + isAssigned(): boolean
+        + isOnGoing(): boolean
         + setTechnician(techinician: Technician, date: dateOfService): void
     } 
     IServiceRequestDAO --> ServiceRequest

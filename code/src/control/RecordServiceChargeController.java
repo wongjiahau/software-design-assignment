@@ -17,7 +17,7 @@ public class RecordServiceChargeController implements IController {
 
 	@Override
 	public boolean run() {
-		ArrayList<ServiceRequest> allAssignedServiceRequest = this.serviceRequestDAO.getAssigned();
+		ArrayList<ServiceRequest> allAssignedServiceRequest = this.serviceRequestDAO.getOnGoing();
 		if(allAssignedServiceRequest.size() == 0) {
 			this.view.displayNoAssignedServiceRequest();
 			return false;
