@@ -6,8 +6,13 @@ This project is using Model-View-Controller (MVC) pattern instead of Model-View-
 
 - **View** - Display data, get user input and validating user input. It knows nothing about the flow of the app.
 
-- **Controllers** - Handle business logic, control the flow of the app  
+- **Controllers** - Handle business logic, control the flow of the app. It will tell Model to retrieve data, and tell View to display the data.
 
+### NOTE
+In this project:  
+- DAO is the Model  
+- Boundary is the View
+- Control is the Controller
 
 
 ## Why is the DAO interface necessary?
