@@ -3,7 +3,7 @@ package mocks;
 import java.util.Collection;
 
 import dao.ITechnicianDAO;
-import model.Technician;
+import entity.Technician;
 
 public class MockTechnicianDAO extends MockDAO<Technician> implements ITechnicianDAO {
     public MockTechnicianDAO() {

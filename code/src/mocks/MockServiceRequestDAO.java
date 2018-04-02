@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import dao.IServiceRequestDAO;
-import model.ServiceRequest;
+import entity.ServiceRequest;
 
 public class MockServiceRequestDAO extends MockDAO<ServiceRequest> implements IServiceRequestDAO {
     private static int nextId = 0;

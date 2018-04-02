@@ -2,7 +2,7 @@ package dao;
 
 import java.util.Collection;
 
-import model.Technician;
+import entity.Technician;
 
 public interface ITechnicianDAO {
 

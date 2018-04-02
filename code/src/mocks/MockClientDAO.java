@@ -1,7 +1,7 @@
 package mocks;
 
 import dao.IClientDAO;
-import model.Client;
+import entity.Client;
 
 public class MockClientDAO extends MockDAO<Client> implements IClientDAO {
     public MockClientDAO() {

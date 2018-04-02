@@ -1,4 +1,4 @@
-package model;
+package entity;
 
 public class Technician extends Contactable {
     private String id;

@@ -3,7 +3,7 @@ package dao;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import model.ServiceRequest;
+import entity.ServiceRequest;
 
 public interface IServiceRequestDAO {
     public boolean add(ServiceRequest newServiceRequest);

@@ -2,8 +2,8 @@ package boundary;
 
 import java.util.ArrayList;
 
+import entity.ServiceRequest;
 import libs.IStream;
-import model.ServiceRequest;
 
 public class RecordServiceChargeView extends View {
     public RecordServiceChargeView(IStream stream) {

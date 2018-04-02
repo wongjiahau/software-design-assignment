@@ -3,8 +3,8 @@ package control;
 import boundary.RecordRequestView;
 import dao.IClientDAO;
 import dao.IServiceRequestDAO;
-import model.Client;
-import model.ServiceRequest;
+import entity.Client;
+import entity.ServiceRequest;
 
 public class RecordRequestController implements IController {
 	private RecordRequestView view;

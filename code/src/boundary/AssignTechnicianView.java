@@ -4,9 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import entity.ServiceRequest;
+import entity.Technician;
 import libs.IStream;
-import model.ServiceRequest;
-import model.Technician;
 
 public class AssignTechnicianView extends View {
     public AssignTechnicianView(IStream stream) {

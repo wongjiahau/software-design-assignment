@@ -7,8 +7,8 @@ import java.util.Date;
 import boundary.AssignTechnicianView;
 import dao.IServiceRequestDAO;
 import dao.ITechnicianDAO;
-import model.ServiceRequest;
-import model.Technician;
+import entity.ServiceRequest;
+import entity.Technician;
 
 public class AssignTechnicianController implements IController {
 	private AssignTechnicianView view;

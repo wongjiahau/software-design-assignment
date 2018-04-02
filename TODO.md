@@ -6,3 +6,6 @@
 []-6-Design class diagram (show everything)
 [X]-7-Package diagram
 [X]-8 Source code listing
+
+
+[]-Do explanation on class diagram

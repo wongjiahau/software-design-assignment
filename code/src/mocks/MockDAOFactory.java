@@ -6,9 +6,9 @@ import dao.IClientDAO;
 import dao.IDAOFactory;
 import dao.IServiceRequestDAO;
 import dao.ITechnicianDAO;
-import model.Client;
-import model.ServiceRequest;
-import model.Technician;
+import entity.Client;
+import entity.ServiceRequest;
+import entity.Technician;
 
 public class MockDAOFactory implements IDAOFactory {
     private IClientDAO clientDAO;

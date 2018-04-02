@@ -1,6 +1,6 @@
 package dao;
 
-import model.Client;
+import entity.Client;
 
 public interface IClientDAO {
     public Client searchByIc(String icNumber);

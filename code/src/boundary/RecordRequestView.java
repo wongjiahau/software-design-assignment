@@ -1,8 +1,8 @@
 package boundary;
 
+import entity.Client;
+import entity.ServiceRequest;
 import libs.IStream;
-import model.Client;
-import model.ServiceRequest;
 
 public class RecordRequestView extends View {
     public RecordRequestView(IStream stream) {

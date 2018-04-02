@@ -1,4 +1,4 @@
-package model;
+package entity;
 
 public class Client extends Contactable {
     private String icNumber;

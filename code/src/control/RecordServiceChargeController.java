@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import boundary.RecordServiceChargeView;
 import dao.IServiceRequestDAO;
-import model.ServiceRequest;
+import entity.ServiceRequest;
 
 public class RecordServiceChargeController implements IController {
 	private RecordServiceChargeView view;
