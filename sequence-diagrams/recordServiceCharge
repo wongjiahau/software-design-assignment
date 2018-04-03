@@ -13,7 +13,7 @@ MainController -> controller : run()
 controller -> DAO : getOnGoing()
 DAO --> controller : onGoingServiceRequests
 alt onGoingServiceRequests.length == 0
-    controller -> view : displayNoAssignedServiceRequest()
+    controller -> view : displayNoOnGoingServiceRequest()
     view --> controller
 else onGoingServiceRequests.length > 0
     controller -> view : displayServiceRequests(onGoingServiceRequests)

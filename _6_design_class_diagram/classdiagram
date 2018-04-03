@@ -140,7 +140,7 @@ together {
         + displayServiceRequests(\n\tserviceRequests: ServiceRequest[]): int
         + getServiceCharge(): double
         + displaySuccess(): void
-        + displayNoAssignedServiceRequest(): void
+        + displayNoOnGoingServiceRequest(): void
     }
     RecordServiceChargeView --> ServiceRequest
 }

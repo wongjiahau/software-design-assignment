@@ -17,12 +17,12 @@ public class RecordServiceChargeController implements IController {
 
 	@Override
 	public boolean run() {
-		ArrayList<ServiceRequest> allAssignedServiceRequest = this.serviceRequestDAO.getOnGoing();
-		if(allAssignedServiceRequest.size() == 0) {
-			this.view.displayNoAssignedServiceRequest();
+		ArrayList<ServiceRequest> onGoingServiceRequests = this.serviceRequestDAO.getOnGoing();
+		if(onGoingServiceRequests.size() == 0) {
+			this.view.displayNoOnGoingServiceRequest();
 			return false;
 		}
-		int serviceRequestId                = this.view.displayServiceRequests(allAssignedServiceRequest);
+		int serviceRequestId                = this.view.displayServiceRequests(onGoingServiceRequests);
 		ServiceRequest chosenServiceRequest = this.serviceRequestDAO.getById(serviceRequestId);
 		double serviceCharge                = this.view.getServiceCharge();
 		chosenServiceRequest.setCharge(serviceCharge);
