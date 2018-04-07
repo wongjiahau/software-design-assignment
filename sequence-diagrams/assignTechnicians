@@ -21,16 +21,23 @@ else pendingServiceRequests.length > 0
     view --> controller : serviceRequestId
     controller -> srDAO : getById(serviceRequestId)
     srDAO --> controller : chosenServiceRequest
-    controller -> tDAO : getAll()
-    tDAO --> controller : allTechnicians
-    controller -> view : displayTechnicians
-    view --> controller : technicianId
-    controller -> tDAO : getById(technicianId)
-    tDAO --> controller : chosenTechnician
     controller -> view : getDateOfService()
     view --> controller : dateOfService
-    controller -> chosenServiceRequest : setTechnician(chosenTechnician, dateOfService)
-    chosenServiceRequest --> controller 
+    controller -> tDAO : getAvailable(dateOfService)
+    tDAO --> controller : availableTechnicians
+    alt availableTechnicians.length == 0
+        controller -> view : displayNoAvailableTechnicians()
+        view --> controller
+    else availableTechnicians.length > 0
+        controller -> view : displayTechnicians
+        view --> controller : technicianId
+        controller -> tDAO : getById(technicianId)
+        tDAO --> controller : chosenTechnician
+        controller -> chosenServiceRequest : setTechnician(chosenTechnician, dateOfService)
+        chosenServiceRequest -> chosenTechnician : addServiceRequest(this)
+        chosenTechnician -> chosenServiceRequest
+        chosenServiceRequest --> controller 
+    end
 end
 controller --> MainController 
 MainController --> Manager
