@@ -58,8 +58,9 @@ public class ServiceRequest {
 		return technician;
 	}
 
-	public void setTechnician(Technician technician, Date dateOfService) {
+	public void setTechnician(Technician technician, Date dateOfService) throws Exception {
 		this.technician = technician;
 		this.dateOfService = dateOfService;
+		this.technician.addServiceRequest(this);	
 	}
 }

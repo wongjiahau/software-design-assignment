@@ -31,7 +31,7 @@ public class MockServiceRequestDAO extends MockDAO<ServiceRequest> implements IS
         return super.getAll();
     }
 
-	public Collection<ServiceRequest> getPending() {
+	public ArrayList<ServiceRequest> getPending() {
         ArrayList<ServiceRequest> allServiceRequests = new ArrayList<ServiceRequest>(this.getAll());
         ArrayList<ServiceRequest> pendingServiceRequests = new ArrayList<ServiceRequest>();
         for (int i = 0; i < allServiceRequests.size(); i++) {

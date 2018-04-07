@@ -9,3 +9,4 @@
 
 
 [X]-10-Do explanation on class diagram
+[]-11-Class diagram should not have cross over?

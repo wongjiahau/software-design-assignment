@@ -27,7 +27,7 @@ public class AssignTechnicianController implements IController {
 	}
 
 	@Override
-	public boolean run() {
+	public boolean run() throws Exception {
 		Collection<ServiceRequest> pendingServiceRequests = this.serviceRequestDAO.getPending();
 		if(pendingServiceRequests.size() == 0) {
 			this.view.displayNoPendingServiceRequest();
@@ -35,10 +35,14 @@ public class AssignTechnicianController implements IController {
 		}
 		int serviceRequestId                              = this.view.displayServiceRequests(new ArrayList<ServiceRequest>(pendingServiceRequests));
 		ServiceRequest chosenServiceRequest               = this.serviceRequestDAO.getById(serviceRequestId);
-		Collection<Technician> allTehnicians              = this.technicianDAO.getAll();
-		String technicianId                               = this.view.displayTechnicians(new ArrayList<Technician>(allTehnicians));
-		Technician chosenTechnician                       = this.technicianDAO.getById(technicianId);
 		Date dateOfService                                = this.view.getDateOfService();
+		Collection<Technician> availableTechnicians       = this.technicianDAO.getAvailable(dateOfService);
+		if(availableTechnicians.size() == 0) {
+			this.view.displayNoAvailableTechnicians(dateOfService);
+			return false;
+		}
+		String technicianId                               = this.view.displayTechnicians(new ArrayList<Technician>(availableTechnicians));
+		Technician chosenTechnician                       = this.technicianDAO.getById(technicianId);
 		chosenServiceRequest.setTechnician(chosenTechnician, dateOfService);
 		this.view.displaySuccess(chosenServiceRequest);
 		return true;

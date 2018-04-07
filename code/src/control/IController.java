@@ -1,5 +1,5 @@
 package control;
 
 public interface IController {
-    boolean run(); 
+    boolean run() throws Exception; 
 }

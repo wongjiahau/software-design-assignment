@@ -71,4 +71,9 @@ public class AssignTechnicianView extends View {
         super.stream.pressAnyKeyToContinue();
 	}
 
+	public void displayNoAvailableTechnicians(Date date) {
+        super.stream.printLine("There are no available technicans on " + date + ".");
+        super.stream.pressAnyKeyToContinue();
+	}
+
 }
