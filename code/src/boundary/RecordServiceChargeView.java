@@ -1,5 +1,6 @@
 package boundary;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import entity.ServiceRequest;
@@ -11,13 +12,14 @@ public class RecordServiceChargeView extends View {
     }
 
 	public int displayServiceRequests(ArrayList<ServiceRequest> serviceRequests) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMMM-dd");
         ArrayList<String> rows = new ArrayList<String>();
         ArrayList<Integer> ids = new ArrayList<Integer>();
         for (ServiceRequest sr: serviceRequests) {
             ids.add(sr.getId());
             rows.add(
                 sr.getId() + "," + 
-                sr.getDateOfService() + "," + 
+                formatter.format(sr.getDateOfService()) + "," + 
                 sr.getClient().getName() + "," + 
                 sr.getTechnician().getName()
             );

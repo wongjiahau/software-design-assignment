@@ -14,6 +14,7 @@ public class AssignTechnicianView extends View {
     }
 
     public int displayServiceRequests(ArrayList<ServiceRequest> serviceRequests) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMMM-dd");
         super.displayTitle("Assign technician to pending service request");
         ArrayList<String> rows = new ArrayList<String>();
         ArrayList<Integer> ids = new ArrayList<Integer>();
@@ -21,7 +22,7 @@ public class AssignTechnicianView extends View {
             ids.add(sr.getId());
             rows.add(
                 sr.getId() + "," + 
-                sr.getDateOfRequest() + "," + 
+                formatter.format(sr.getDateOfRequest()) + "," + 
                 sr.getClient().getName() + "," + 
                 sr.getClient().getIcNumber()
             );
@@ -72,7 +73,8 @@ public class AssignTechnicianView extends View {
 	}
 
 	public void displayNoAvailableTechnicians(Date date) {
-        super.stream.printLine("There are no available technicans on " + date + ".");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMMM-dd");
+        super.stream.printLine("There are no available technicans on " + formatter.format(date) + ".");
         super.stream.pressAnyKeyToContinue();
 	}
 

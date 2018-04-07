@@ -12,7 +12,7 @@ public class MainController implements IController {
     }
 
 	@Override
-	public boolean run() {
+	public boolean run() throws Exception {
         String choice = this.view.displayMenu();
         IController controller = new NullController();
         switch (choice) {
