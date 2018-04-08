@@ -12,6 +12,7 @@ public class RecordServiceChargeView extends View {
     }
 
 	public int displayServiceRequests(ArrayList<ServiceRequest> serviceRequests) {
+        this.displayTitle("Record service charge");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMMM-dd");
         ArrayList<String> rows = new ArrayList<String>();
         ArrayList<Integer> ids = new ArrayList<Integer>();
