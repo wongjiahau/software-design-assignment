@@ -13,22 +13,22 @@ public class MockTechnicianDAO extends MockDAO<Technician> implements ITechnicia
     }
 
     @Override
-	public Collection<Technician> getAll() {
+    public Collection<Technician> getAll() {
         return super.getAll();
     }
 
     @Override
-	public void add(Technician newTechnician) {
+    public void add(Technician newTechnician) {
         super.add(newTechnician.getId(), newTechnician);
     }
 
     @Override
-	public Technician getById(String technicianId) {
+    public Technician getById(String technicianId) {
         return super.getById(technicianId);
     }
 
-	@Override
-	public ArrayList<Technician> getAvailable(Date dateOfService) {
+    @Override
+    public ArrayList<Technician> getAvailable(Date dateOfService) {
         ArrayList<Technician> result = new ArrayList<Technician>();
         Collection<Technician> allTechnicians = this.getAll();
         for (Technician technician : allTechnicians) {
@@ -37,5 +37,5 @@ public class MockTechnicianDAO extends MockDAO<Technician> implements ITechnicia
             }
         }
         return result;
-	}
+    }
 }

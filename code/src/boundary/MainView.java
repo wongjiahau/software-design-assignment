@@ -23,8 +23,8 @@ public class MainView extends View {
 
     }
 
-	public void displayGoodBye() {
+    public void displayGoodBye() {
         this.stream.printLine("Good bye.");
-	}
+    }
 
 }

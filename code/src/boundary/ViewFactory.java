@@ -21,8 +21,8 @@ public class ViewFactory {
         return new AssignTechnicianView(this.stream);
     }
 
-	public RecordServiceChargeView createRecordServiceChargeView() {
-		return new RecordServiceChargeView(this.stream);
-	}
+    public RecordServiceChargeView createRecordServiceChargeView() {
+        return new RecordServiceChargeView(this.stream);
+    }
 
 }

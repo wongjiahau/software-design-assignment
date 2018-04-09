@@ -17,14 +17,14 @@ public class ConsoleStream implements IStream {
         System.out.println(message);
     }
 
-	@Override
-	public String getNextLine() {
+    @Override
+    public String getNextLine() {
         return this.scanner.nextLine();
     }
 
-	@Override
-	public void pressAnyKeyToContinue() {
+    @Override
+    public void pressAnyKeyToContinue() {
         System.out.println("Press any key to continue . . .");
         this.scanner.nextLine();
-	}
+    }
 }

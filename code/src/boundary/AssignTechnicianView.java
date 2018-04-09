@@ -65,14 +65,14 @@ public class AssignTechnicianView extends View {
             "."
         );
         super.stream.pressAnyKeyToContinue();
-	}
+    }
 
-	public void displayNoPendingServiceRequest() {
+    public void displayNoPendingServiceRequest() {
         super.stream.printLine("There are no pending service request.");
         super.stream.pressAnyKeyToContinue();
-	}
+    }
 
-	public void displayNoAvailableTechnicians(Date date) {
+    public void displayNoAvailableTechnicians(Date date) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMMM-dd");
         super.stream.printLine("There are no available technicans on " + formatter.format(date) + ".");
         super.stream.pressAnyKeyToContinue();

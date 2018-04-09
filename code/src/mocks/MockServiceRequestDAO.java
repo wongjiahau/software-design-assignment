@@ -31,7 +31,7 @@ public class MockServiceRequestDAO extends MockDAO<ServiceRequest> implements IS
         return super.getAll();
     }
 
-	public ArrayList<ServiceRequest> getPending() {
+    public ArrayList<ServiceRequest> getPending() {
         ArrayList<ServiceRequest> allServiceRequests = new ArrayList<ServiceRequest>(this.getAll());
         ArrayList<ServiceRequest> pendingServiceRequests = new ArrayList<ServiceRequest>();
         for (int i = 0; i < allServiceRequests.size(); i++) {
@@ -40,10 +40,10 @@ public class MockServiceRequestDAO extends MockDAO<ServiceRequest> implements IS
                 pendingServiceRequests.add(serviceRequest);
             }
         }
-		return pendingServiceRequests;
-	}
+        return pendingServiceRequests;
+    }
 
-	public ArrayList<ServiceRequest> getOnGoing() {
+    public ArrayList<ServiceRequest> getOnGoing() {
         ArrayList<ServiceRequest> allServiceRequests = new ArrayList<ServiceRequest>(this.getAll());
         ArrayList<ServiceRequest> onGoingServiceRequests = new ArrayList<ServiceRequest>();
         for (int i = 0; i < allServiceRequests.size(); i++) {
@@ -52,7 +52,7 @@ public class MockServiceRequestDAO extends MockDAO<ServiceRequest> implements IS
                 onGoingServiceRequests.add(serviceRequest);
             }
         }
-		return onGoingServiceRequests;
-	}
+        return onGoingServiceRequests;
+    }
 
 }

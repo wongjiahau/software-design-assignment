@@ -8,12 +8,12 @@ import entity.Technician;
 
 public interface ITechnicianDAO {
 
-	Collection<Technician> getAll();
+    Collection<Technician> getAll();
 
-	void add(Technician newTechnician);
+    void add(Technician newTechnician);
 
-	Technician getById(String technicianId);
+    Technician getById(String technicianId);
 
-	ArrayList<Technician> getAvailable(Date date);
+    ArrayList<Technician> getAvailable(Date date);
 
 }

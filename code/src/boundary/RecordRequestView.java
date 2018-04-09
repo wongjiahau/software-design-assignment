@@ -17,38 +17,38 @@ public class RecordRequestView extends View {
         );
     }
 
-	public boolean displayClientNotExist() {
+    public boolean displayClientNotExist() {
         this.stream.printLine("This client does not exist in the system.");
         return this.prompter.promptYesNo(
             "Do you want to create a new client?"
         );
-	}
+    }
 
-	public String getName() {
-		return this.prompter.prompt(
+    public String getName() {
+        return this.prompter.prompt(
             "Enter name", 
             "^([a-z]|[A-Z]|[ '.,])+$", 
             "Name should not contain weird symbols."
         );
-	}
+    }
 
-	public String getPhoneNum() {
+    public String getPhoneNum() {
         return this.prompter.prompt(
             "Enter phone number",
             "^[0-9]{3}-[0-9]{7}[0-9]?$",
              "Phone number must be in format of XXX-XXXXXXX"
         );
-	}
+    }
 
-	public String getAddress() {
+    public String getAddress() {
         return this.prompter.prompt(
             "Enter address",
             ".*",
              ""
         );
-	}
+    }
 
-	public void displayServiceRequestCreated(ServiceRequest serviceRequest) {
+    public void displayServiceRequestCreated(ServiceRequest serviceRequest) {
         String clientName    = serviceRequest.getClient().getName();
         String dateTime      = serviceRequest.getDateOfRequest().toString();
         int serviceRequestId = serviceRequest.getId();
@@ -59,12 +59,12 @@ public class RecordRequestView extends View {
         super.stream.pressAnyKeyToContinue();
     }
 
-	public boolean displayClientInfo(Client client) {
+    public boolean displayClientInfo(Client client) {
         return this.prompter.promptYesNo(
             "The I/C matched a client named '" + client.getName() + "'.\n", 
             "Do you want to create a new service request for this client? "
         );
-	}
+    }
 
 
 }

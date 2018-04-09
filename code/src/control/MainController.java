@@ -11,8 +11,8 @@ public class MainController implements IController {
         this.controllerFactory = controllerFactory;
     }
 
-	@Override
-	public boolean run() throws Exception {
+    @Override
+    public boolean run() throws Exception {
         String choice = this.view.displayMenu();
         IController controller = new NullController();
         switch (choice) {
@@ -31,7 +31,7 @@ public class MainController implements IController {
         }
         controller.run();
         return true;
-		
-	}
+        
+    }
 
 }

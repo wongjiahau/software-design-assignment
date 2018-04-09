@@ -25,13 +25,13 @@ public class MockStream implements IStream {
         return this.inputLinesStack.pop();
     }
 
-	@Override
-	public void print(String message) {
+    @Override
+    public void print(String message) {
         this.printedLines += message;
     }
 
-	@Override
-	public void printLine(String message) {
+    @Override
+    public void printLine(String message) {
         this.printedLines += message + "\n";
     }
 
@@ -39,6 +39,6 @@ public class MockStream implements IStream {
         return this.printedLines;
     }
 
-	@Override
-	public void pressAnyKeyToContinue() {} 
+    @Override
+    public void pressAnyKeyToContinue() {} 
 }

@@ -11,7 +11,7 @@ public class RecordServiceChargeView extends View {
         super(stream);
     }
 
-	public int displayServiceRequests(ArrayList<ServiceRequest> serviceRequests) {
+    public int displayServiceRequests(ArrayList<ServiceRequest> serviceRequests) {
         this.displayTitle("Record service charge");
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMMM-dd");
         ArrayList<String> rows = new ArrayList<String>();
@@ -27,19 +27,19 @@ public class RecordServiceChargeView extends View {
         }
         super.displayTable("ID,DATE-OF-SERVICE,CLIENT-NAME,TECHNICIAN-NAME", rows);
         return super.prompter.promptForIntegerId("\nEnter ID of desired service request", ids);
-	}
+    }
 
-	public double getServiceCharge() {
+    public double getServiceCharge() {
         return super.prompter.promptDouble("Enter service charge");
-	}
+    }
 
-	public void displaySuccess() {
+    public void displaySuccess() {
         this.stream.printLine("The entered service charge had been recorded\nfor the chosen service request");
         this.stream.pressAnyKeyToContinue();
-	}
+    }
 
-	public void displayNoOnGoingServiceRequest() {
+    public void displayNoOnGoingServiceRequest() {
         this.stream.printLine("There are no on going service request.");
         this.stream.pressAnyKeyToContinue();
-	}
+    }
 }

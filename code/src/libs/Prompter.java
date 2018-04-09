@@ -69,7 +69,7 @@ public class Prompter {
         return Integer.parseInt(this.promptForStringId(prompt, stringIds));
     }
 
-	public Date promptDate(String prompt) {
+    public Date promptDate(String prompt) {
         while(true) {
             String inputDate = this.prompt(
                 prompt + " (yyyy-MM-dd/today)", 
@@ -85,5 +85,5 @@ public class Prompter {
                 this.stream.printLine("ERROR: Invalid date.");                
             }
         }
-	}
+    }
 }
