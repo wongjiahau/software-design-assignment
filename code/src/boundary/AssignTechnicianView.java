@@ -31,7 +31,7 @@ public class AssignTechnicianView extends View {
         return super.prompter.promptForIntegerId("\nEnter ID of desired service request", ids);
     }
 
-	public String displayTechnicians(ArrayList<Technician> technicians) {
+    public String displayTechnicians(ArrayList<Technician> technicians) {
         ArrayList<String> rows = new ArrayList<String>();
         ArrayList<String> ids = new ArrayList<String>();
         for (Technician t: technicians) {
@@ -44,13 +44,13 @@ public class AssignTechnicianView extends View {
         }
         super.displayTable("ID,NAME,PHONE-NUMBER", rows);
         return super.prompter.promptForStringId("\nEnter ID of technician to be assigned", ids);
-	}
+    }
 
-	public Date getDateOfService() {
+    public Date getDateOfService() {
         return super.prompter.promptDate("Enter date of service");
-	}
+    }
 
-	public void displaySuccess(ServiceRequest serviceRequest) {
+    public void displaySuccess(ServiceRequest serviceRequest) {
         super.stream.printLine(
             "Technician " + 
             serviceRequest.getTechnician().getId() +
@@ -76,6 +76,6 @@ public class AssignTechnicianView extends View {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMMM-dd");
         super.stream.printLine("There are no available technicans on " + formatter.format(date) + ".");
         super.stream.pressAnyKeyToContinue();
-	}
+    }
 
 }
