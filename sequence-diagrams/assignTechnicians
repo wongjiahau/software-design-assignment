@@ -17,7 +17,7 @@ alt pendingServiceRequests.length == 0
     controller -> view : displayNoPendingServiceRequest()
     view --> controller
 else pendingServiceRequests.length > 0
-    controller -> view : displayServiceRequests(onGoingServiceRequests)
+    controller -> view : displayServiceRequests(pendingServiceRequests)
     view --> controller : serviceRequestId
     controller -> srDAO : getById(serviceRequestId)
     srDAO --> controller : chosenServiceRequest
@@ -29,7 +29,7 @@ else pendingServiceRequests.length > 0
         controller -> view : displayNoAvailableTechnicians()
         view --> controller
     else availableTechnicians.length > 0
-        controller -> view : displayTechnicians
+        controller -> view : displayTechnicians(availableTechnicians)
         view --> controller : technicianId
         controller -> tDAO : getById(technicianId)
         tDAO --> controller : chosenTechnician
